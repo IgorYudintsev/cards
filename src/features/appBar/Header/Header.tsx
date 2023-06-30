@@ -1,7 +1,7 @@
 import React from "react";
 import incubaIcon from "assets/icon/incubaIcon.jpg";
 import styled from "styled-components";
-import { ButtonComponent } from "reusable components/ButtonComponent";
+import { ButtonComponent } from "reusableComponents/ButtonComponent";
 
 type PropsType = {
   disabled?: boolean;
