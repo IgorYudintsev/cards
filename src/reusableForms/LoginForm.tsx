@@ -14,19 +14,17 @@ type LoginFormProps = {
   title: string;
   callBack: (payload: ArgLoginType) => void;
   forRegister: boolean;
-  children?: ReactNode;
+  //children?: ReactNode;
 };
 
 export type Inputs = {
   email: string;
   password: string;
-  password2?: string;
   rememberMe: boolean;
 };
 
 export const LoginForm: React.FC<LoginFormProps> = (props) => {
   const { title, callBack, forRegister } = props;
-  const [passwordsRequire, setPasswordsRequire] = useState(true);
 
   const {
     control,
@@ -41,18 +39,8 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
       password: data.password, //12345678
       rememberMe: data.rememberMe,
     };
-    console.log(payload);
 
-    if (!forRegister) {
-      callBack(payload);
-    }
-    if (forRegister && data.password === data.password2) {
-      setPasswordsRequire(true);
-      callBack(payload);
-    }
-    if (forRegister && data.password !== data.password2) {
-      setPasswordsRequire(false);
-    }
+    callBack(payload);
   };
 
   return (
@@ -76,7 +64,6 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
               rules={{ required: "Password is required" }}
               control={control}
               errors={errors.password}
-              passwordsRequire={passwordsRequire}
             />
 
             <CheckBox name={"rememberMe"} control={control} />

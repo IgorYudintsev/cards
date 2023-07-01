@@ -3,14 +3,15 @@ import logo from "logo.svg";
 import { Counter } from "features/counter/Counter";
 import "app/App.css";
 import { Header } from "features/appBar/Header/Header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "app/hooks";
 import { authThunks } from "features/auth/auth.slice";
 
 function App() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
-    dispatch(authThunks.authMe());
+    navigate("/sign-in");
   }, []);
 
   return (

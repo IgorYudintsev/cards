@@ -2,6 +2,12 @@ import React from "react";
 import incubaIcon from "assets/icon/incubaIcon.jpg";
 import styled from "styled-components";
 import { ButtonComponent } from "reusableComponents/ButtonComponent";
+import { Avatar } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useNavigate } from "react-router-dom";
+
+import ava from "assets/icon/ava.jpg";
+import MenuListComposition from "reusableComponents/MenuListComposition";
 
 type PropsType = {
   disabled?: boolean;
@@ -9,17 +15,14 @@ type PropsType = {
 
 export const Header: React.FC<PropsType> = (props) => {
   const { disabled = false } = props;
-  // const dispatch = useAppDispatch();
-  // const profile = useAppSelector((state) => state.auth.profile);
-  // const navigate = useNavigate();
-  //
-  // const goToRegisterHandler = () => {
-  //   navigate("/register");
-  // };
+  const logined = useAppSelector((state) => state.auth.profile);
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(authThunks.authMe());
-  // }, []);
+  const navigate = useNavigate();
+
+  const goToRegisterHandler = () => {
+    navigate("/sign-up");
+  };
 
   return (
     <>
@@ -28,17 +31,17 @@ export const Header: React.FC<PropsType> = (props) => {
           <img src={incubaIcon} alt="incubaIcon" />
         </Icon>
 
-        {/*{profile ? (*/}
-        {/*  <LoginWrapper>*/}
-        {/*    <MenuListComposition />*/}
-        {/*    /!*<NameSpan>{profile.name}</NameSpan>*!/*/}
-        {/*    <Avatar style={{ marginTop: "-7px" }} alt="Remy Sharp" src={ava} sx={{ width: 40, height: 40 }} />*/}
-        {/*  </LoginWrapper>*/}
-        {/*) : (*/}
-        <ButtonCase>
-          <ButtonComponent buttonName={"Sign up"} callback={() => {}} disabled={disabled} />
-        </ButtonCase>
-        {/*// )}*/}
+        {logined ? (
+          <LoginWrapper>
+            <MenuListComposition />
+            {/*<NameSpan>{profile.name}</NameSpan>*/}
+            <Avatar style={{ marginTop: "-7px" }} alt="Remy Sharp" src={ava} sx={{ width: 40, height: 40 }} />
+          </LoginWrapper>
+        ) : (
+          <ButtonCase>
+            <ButtonComponent buttonName={"Sign up"} callback={goToRegisterHandler} disabled={disabled} />
+          </ButtonCase>
+        )}
       </Wrapper>
       <LineWithShadow />
     </>

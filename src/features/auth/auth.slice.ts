@@ -16,15 +16,16 @@ const slice = createSlice({
   name: "auth",
   initialState: {
     profile: null as ProfileType | null,
+    goToLogin: false as boolean,
+
     registred: false as boolean,
     // error: null as null | string | undefined,
     emailSended: false as boolean,
     email: null as null | string,
-    goToLogin: false as boolean,
   },
   reducers: {
-    setGoToLogin: (state, action: PayloadAction<{ goToLogin: boolean }>) => {
-      state.goToLogin = action.payload.goToLogin;
+    cleanProfile: (state, action) => {
+      state.profile = null;
     },
   },
   extraReducers: (builder) => {
@@ -124,8 +125,8 @@ const login = createAppAsyncThunk<ProfileType, ArgLoginType>("auth/login", async
 const logout = createAppAsyncThunk<void, void>("auth/logout", async (arg, thunkAPI) => {
   return thunkTryCatch(thunkAPI, async () => {
     const { dispatch, rejectWithValue } = thunkAPI;
-    await authApi.logout();
-    dispatch(authActions.setGoToLogin({ goToLogin: true }));
+    const res = await authApi.logout();
+    dispatch(authActions.cleanProfile({}));
   });
 });
 
@@ -167,7 +168,7 @@ const setNewPas = createAppAsyncThunk<void, SetNewPasType>("auth/setNewPas", asy
   return thunkTryCatch(thunkAPI, async () => {
     const { dispatch, rejectWithValue } = thunkAPI;
     await authApi.setNewPas(arg);
-    dispatch(authActions.setGoToLogin({ goToLogin: true }));
+    //dispatch(authActions.setGoToLogin({ goToLogin: true }));
   });
 });
 

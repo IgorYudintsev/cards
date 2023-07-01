@@ -10,6 +10,7 @@ import { Packs } from "components/Packs/Packs";
 import { Cards } from "components/Cards/Cards";
 import { Learn } from "components/Learn/Learn";
 import App from "app/App";
+import { ProtectedRoute } from "routes/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -47,11 +48,17 @@ export const router = createBrowserRouter([
         element: <Profile />,
         // ErrorBoundary: ErrorPage,
       },
+
       {
         path: "packs",
-        element: <Packs />,
+        element: (
+          <ProtectedRoute>
+            <Packs />
+          </ProtectedRoute>
+        ),
         // ErrorBoundary: ErrorPage,
       },
+
       {
         path: "cards",
         element: <Cards />,

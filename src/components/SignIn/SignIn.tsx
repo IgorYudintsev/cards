@@ -9,14 +9,13 @@ import { ArgLoginType } from "features/auth/auth.api";
 export const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  //const logined = useAppSelector((state) => state.auth.profile);
+  const logined = useAppSelector((state) => state.auth.profile);
 
-  // if (logined) {
-  //     navigate("/packs");
-  // }
+  logined ? navigate("/packs") : dispatch(authThunks.authMe());
 
   const queryLogin = (payload: ArgLoginType) => {
-    //dispatch(authThunks.login(payload));
+    console.log(payload);
+    dispatch(authThunks.login(payload));
     //к каждой санке можно прикрутить then
     // dispatch(authThunks.login(payload))
     //     .unwrap() //благодаря unwrap() -мы отрабатываем положительные или отрицательные кейсы
