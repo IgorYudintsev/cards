@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import incubaIcon from "assets/icon/incubaIcon.jpg";
 import styled from "styled-components";
 import { ButtonComponent } from "reusableComponents/ButtonComponent";
 import { Avatar } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import ava from "assets/icon/ava.jpg";
 import MenuListComposition from "reusableComponents/MenuListComposition";
@@ -14,6 +14,19 @@ type PropsType = {
 };
 
 export const Header: React.FC<PropsType> = (props) => {
+  const location = useLocation();
+  const [locat, setLocal] = useState<string>("");
+
+  useEffect(() => {
+    if (location.pathname === "/sign-in") {
+      setLocal("sign-up");
+    } else {
+      setLocal("sign-in");
+    }
+  }, [location.pathname]);
+
+  //pathname:"/sign-in"
+
   const { disabled = false } = props;
   const logined = useAppSelector((state) => state.auth.profile);
   const dispatch = useAppDispatch();
@@ -21,7 +34,7 @@ export const Header: React.FC<PropsType> = (props) => {
   const navigate = useNavigate();
 
   const goToRegisterHandler = () => {
-    navigate("/sign-up");
+    navigate("/" + locat);
   };
 
   return (
@@ -39,7 +52,7 @@ export const Header: React.FC<PropsType> = (props) => {
           </LoginWrapper>
         ) : (
           <ButtonCase>
-            <ButtonComponent buttonName={"Sign up"} callback={goToRegisterHandler} disabled={disabled} />
+            <ButtonComponent buttonName={locat} callback={goToRegisterHandler} disabled={disabled} />
           </ButtonCase>
         )}
       </Wrapper>

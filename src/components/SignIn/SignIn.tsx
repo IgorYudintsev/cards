@@ -29,7 +29,7 @@ export const SignIn = () => {
   return (
     <>
       <FormComponent>
-        <LoginForm title={"Sign in"} callBack={queryLogin} forRegister={false} />
+        <LoginForm title={"Sign in"} callBack={queryLogin} />
       </FormComponent>
     </>
   );

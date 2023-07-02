@@ -77,7 +77,7 @@ const slice = createSlice({
 
 const register = createAppAsyncThunk<void, ArgRegisterType>("auth/register", async (arg: ArgRegisterType, thunkAPI) => {
   await thunkTryCatch(thunkAPI, async () => {
-    await authApi.register(arg);
+    return await authApi.register(arg);
   });
 });
 

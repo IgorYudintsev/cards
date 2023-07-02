@@ -1,28 +1,27 @@
 import React, { ReactNode, useState } from "react";
-import { ArgLoginType } from "features/auth/auth.api";
-import { Paper } from "@mui/material";
+import { ButtonComponentForm } from "reusableComponents/ButtonComponentForm";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Paper } from "@mui/material";
+import { ArgLoginType, ArgRegisterType } from "features/auth/auth.api";
 import { S } from "./Form_styles";
 import { TextInputForm } from "reusableComponents/TextInputForm";
 import { PasswordTextInputForm } from "reusableComponents/PasswordTextInputForm";
 import { Link } from "react-router-dom";
-import { CheckBox } from "reusableComponents/CheckBox";
-import { ButtonComponent } from "reusableComponents/ButtonComponent";
-import { ButtonComponentForm } from "reusableComponents/ButtonComponentForm";
 
-type LoginFormProps = {
+type PropsType = {
   title: string;
-  callBack: (payload: ArgLoginType) => void;
+  callBack: (payload: ArgRegisterType) => void;
 };
 
 export type Inputs = {
   email: string;
   password: string;
-  rememberMe: boolean;
+  password2: string;
 };
 
-export const LoginForm: React.FC<LoginFormProps> = (props) => {
+export const RegisterForm: React.FC<PropsType> = (props) => {
   const { title, callBack } = props;
+  const [passwordsRequire, setPasswordsRequire] = useState(true);
 
   const {
     control,
@@ -31,13 +30,17 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
     const payload = {
       email: data.email, //dollarselephant@gmail.com
       password: data.password, //12345678
-      rememberMe: data.rememberMe,
     };
-
-    callBack(payload);
+    if (data.password === data.password2) {
+      setPasswordsRequire(true);
+      callBack(payload);
+    } else {
+      setPasswordsRequire(false);
+    }
   };
 
   return (
@@ -61,13 +64,17 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
               rules={{ required: "Password is required" }}
               control={control}
               errors={errors.password}
+              passwordsRequire={passwordsRequire}
             />
 
-            <CheckBox name={"rememberMe"} control={control} />
-
-            <S.WrapperForgetPassword>
-              <Link to={"/forgot"}>Forgot password?</Link>
-            </S.WrapperForgetPassword>
+            <PasswordTextInputForm
+              name={"password2"}
+              label={"Password"}
+              rules={{ required: "Password is required" }}
+              control={control}
+              errors={errors.password2}
+              passwordsRequire={passwordsRequire}
+            />
 
             <S.TipicalWrapper>
               <ButtonComponentForm variant={"contained"} control={control} buttonName={title} />
