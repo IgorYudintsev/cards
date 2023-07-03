@@ -16,11 +16,11 @@ const slice = createSlice({
   name: "auth",
   initialState: {
     profile: null as ProfileType | null,
-    goToLogin: false as boolean,
+    // goToLogin: false as boolean,
 
-    registred: false as boolean,
+    //registred: false as boolean,
     // error: null as null | string | undefined,
-    emailSended: false as boolean,
+    // emailSended: false as boolean,
     email: null as null | string,
   },
   reducers: {
@@ -40,11 +40,11 @@ const slice = createSlice({
       // state.error = action.payload;   // мы сделали универсальный для всех кейсов
       // });
 
-      .addCase(register.fulfilled, (state, action) => {
-        state.registred = true;
-      })
+      // .addCase(register.fulfilled, (state, action) => {
+      //   state.registred = true;
+      // })
       .addCase(forgetpassword.fulfilled, (state, action) => {
-        state.emailSended = action.payload.emailSended;
+        //state.emailSended = action.payload.emailSended;
         state.email = action.payload.email;
       })
       //раньше шло в экстраредюсеры, но из-за дублирования кода пришлось избавиться
@@ -76,8 +76,8 @@ const slice = createSlice({
 // );
 
 const register = createAppAsyncThunk<void, ArgRegisterType>("auth/register", async (arg: ArgRegisterType, thunkAPI) => {
-  await thunkTryCatch(thunkAPI, async () => {
-    return await authApi.register(arg);
+  return thunkTryCatch(thunkAPI, async () => {
+    await authApi.register(arg);
   });
 });
 
@@ -141,12 +141,12 @@ const logout = createAppAsyncThunk<void, void>("auth/logout", async (arg, thunkA
 //   }
 // });
 
-const forgetpassword = createAppAsyncThunk<{ emailSended: boolean; email: string }, ForgetPasswordType>(
+const forgetpassword = createAppAsyncThunk<{ email: string }, ForgetPasswordType>(
   "auth/forget",
   async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
       await authApi.forget(arg);
-      return { emailSended: true, email: arg.email };
+      return { email: arg.email };
     });
   }
 );

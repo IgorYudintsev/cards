@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
         // ErrorBoundary: ErrorPage,
       },
       {
-        path: "set-new-password",
+        path: "set-new-password/:token",
         element: <SetNewPassword />,
         // ErrorBoundary: ErrorPage,
       },

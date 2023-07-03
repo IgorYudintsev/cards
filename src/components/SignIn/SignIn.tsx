@@ -14,17 +14,16 @@ export const SignIn = () => {
   logined ? navigate("/packs") : dispatch(authThunks.authMe());
 
   const queryLogin = (payload: ArgLoginType) => {
-    console.log(payload);
     dispatch(authThunks.login(payload));
-    //к каждой санке можно прикрутить then
-    // dispatch(authThunks.login(payload))
-    //     .unwrap() //благодаря unwrap() -мы отрабатываем положительные или отрицательные кейсы
-    //     .then((res) => {
-    //         toast.success("Вы успешно залогинились");
-    //     })
-    //     .catch((err) => {
-    //         // toast.error("Залогиниться не удалось");
-    //     });
+    // .unwrap() //благодаря unwrap() -мы отрабатываем положительные или отрицательные кейсы
+    // .then((res) => {
+    //   console.log("NONONNONONONONONO!");
+    //   //toast.success("Вы успешно залогинились");
+    // })
+    // .catch((err) => {
+    //   console.log("ok!");
+    //   // toast.error("Залогиниться не удалось");
+    // });
   };
   return (
     <>

@@ -10,32 +10,31 @@ export const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  // const queryLogin = (payload: ArgRegisterType) => {
-  //   dispatch(authThunks.register(payload))
-  //     .unwrap() //благодаря unwrap() -мы отрабатываем положительные или отрицательные кейсы
-  //     .then((res) => {
-  //       navigate("/sign-in");
-  //       // toast.success("Вы успешно залогинились");
-  //     })
-  //     .catch((err) => {
-  //       navigate("/sign-up");
-  //       console.log("Такой Юзверь уже есть");
-  //       // toast.error("Залогиниться не удалось");
-  //     });
-  // };
-
   const queryLogin = (payload: ArgRegisterType) => {
     dispatch(authThunks.register(payload))
+      .unwrap() //благодаря unwrap() -мы отрабатываем положительные или отрицательные кейсы
       .then((res) => {
         navigate("/sign-in");
         // toast.success("Вы успешно залогинились");
       })
       .catch((err) => {
-        //navigate("/sign-up");
         console.log("Такой Юзверь уже есть");
         // toast.error("Залогиниться не удалось");
       });
   };
+
+  // const queryLogin = (payload: ArgRegisterType) => {
+  //   dispatch(authThunks.register(payload))
+  //     .then((res) => {
+  //       navigate("/sign-in");
+  //       // toast.success("Вы успешно залогинились");
+  //     })
+  //     .catch((err) => {
+  //       //navigate("/sign-up");
+  //       console.log("Такой Юзверь уже есть");
+  //       // toast.error("Залогиниться не удалось");
+  //     });
+  // };
 
   return (
     <FormComponent>

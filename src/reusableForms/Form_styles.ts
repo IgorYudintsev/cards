@@ -24,11 +24,6 @@ const TipicalWrapper = styled.div`
   }
 `;
 
-// const TipicalWrapper = styled.div`
-//   margin-top: 40px;
-//
-// `;
-
 const Wrapper = styled.span`
   margin-top: 50px;
   display: flex;
@@ -43,7 +38,7 @@ const WrapperForgetPassword = styled.span`
 
   & > a {
     text-decoration: none;
-    color: black;
+    color: #036ea4;
   }
 `;
 

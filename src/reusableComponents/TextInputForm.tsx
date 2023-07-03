@@ -11,6 +11,7 @@ type TextInputProps = {
 };
 
 export const TextInputForm: React.FC<TextInputProps> = ({ name, control, label, rules, errors }) => {
+  const currentError = errors?.type === "required" ? "This field is required" : "Please enter a valid email address.";
   return (
     <Controller
       name={name}
@@ -27,7 +28,7 @@ export const TextInputForm: React.FC<TextInputProps> = ({ name, control, label, 
             variant="filled"
             defaultValue={field.value}
           />
-          {errors && <span style={{ color: "red" }}>This field is required</span>}
+          {errors && <span style={{ color: "red" }}>{currentError}</span>}
         </>
       )}
     />

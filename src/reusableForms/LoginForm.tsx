@@ -66,7 +66,7 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
             <CheckBox name={"rememberMe"} control={control} />
 
             <S.WrapperForgetPassword>
-              <Link to={"/forgot"}>Forgot password?</Link>
+              <Link to={"/forgot-password"}>Forgot password?</Link>
             </S.WrapperForgetPassword>
 
             <S.TipicalWrapper>
