@@ -167,7 +167,7 @@ const forgetpassword = createAppAsyncThunk<{ email: string }, ForgetPasswordType
 const setNewPas = createAppAsyncThunk<void, SetNewPasType>("auth/setNewPas", async (arg, thunkAPI) => {
   return thunkTryCatch(thunkAPI, async () => {
     const { dispatch, rejectWithValue } = thunkAPI;
-    await authApi.setNewPas(arg);
+    return await authApi.setNewPas(arg);
     //dispatch(authActions.setGoToLogin({ goToLogin: true }));
   });
 });
