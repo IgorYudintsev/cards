@@ -25,12 +25,6 @@ export const SetNewPassword = () => {
       .catch((err) => {});
   };
 
-  //const goToLogin = useAppSelector((state) => state.auth.goToLogin);
-
-  // if (goToLogin) {
-  //   navigate("/login");
-  // }
-
   return (
     <FormComponent>
       <SetnewPassForm title={"Create new password"} callBack={querySetNewPas} forgot={false} />
