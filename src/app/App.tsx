@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { authThunks } from "features/auth/auth.slice";
 
 import LinearProgressVariants from "utils/LinearProgressVariants";
+import { GlobalError } from "reusableComponents/GlobalError";
 
 function App() {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ function App() {
       <div>
         <Outlet />
       </div>
+      <GlobalError />
     </div>
   );
 }

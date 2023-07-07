@@ -65,7 +65,7 @@ export const ForgotForm: React.FC<PropsType> = (props) => {
             </S.TipicalWrapper>
 
             <S.DontHaveAccount>
-              <Link to={"/login"}>Try logging in</Link>
+              <Link to={"/sign-in"}>Try logging in</Link>
             </S.DontHaveAccount>
           </S.FormWrapper>
         </form>
