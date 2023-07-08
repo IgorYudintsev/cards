@@ -15,6 +15,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { HeadersType } from "components/Packs/Packs";
+import { CurrentPacks } from "reusableComponents/CurrentPacks";
 
 type PropsType = {
   tableName: string;
@@ -28,12 +29,12 @@ type PropsType = {
 };
 export const Spreadsheet: React.FC<PropsType> = (props) => {
   const { tableName, packs, headers, valueRange, setValueRange, titleSearch, setTitleSearch, pack } = props;
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
-  const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
+  // const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
+  //
+  // const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
   let [sortedPacks, setSortedPacks] = useState(packs);
-
+  //
   let [showCards, setShowCards] = useState(false);
   let [sortHandler, setSortHandler] = useState(false);
 
@@ -52,12 +53,15 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
     setSortedPacks(packs);
   }, [packs]);
 
-  const cutter = (str: string, cut: number) => {
-    if (cut === 13) {
-      return str.length > cut ? `${str.slice(0, cut)}...` : str;
-    }
-    return str.length > cut ? `${str.slice(0, cut)}` : str;
-  };
+  // const updateHandler = (id: string) => {
+  //   const payload = {
+  //     cardsPack: {
+  //       _id: id,
+  //       name: "UPDATED PACK",
+  //     },
+  //   };
+  //   dispatch(packsThunks.updatePack({ payload, userID: userIDfromProfile }));
+  // };
 
   const headersData = headers.map((el) => {
     let currentName = el.name === "cards";
@@ -75,57 +79,6 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
       </TableCell>
     );
   });
-  const deleteHandler = (id: string) => {
-    dispatch(packsThunks.deletePack({ idForDelete: id, userID: userIDfromProfile }));
-  };
-
-  const updateHandler = (id: string) => {
-    const payload = {
-      cardsPack: {
-        _id: id,
-        name: "UPDATED PACK",
-      },
-    };
-    dispatch(packsThunks.updatePack({ payload, userID: userIDfromProfile }));
-  };
-
-  const navigateHandler = () => {
-    navigate("/cards");
-  };
-
-  const currentPacks = sortedPacks.map((row) => (
-    <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-      <TableCell component="th" scope="row">
-        {cutter(row.name, 13)}
-      </TableCell>
-      <TableCell size={"small"} align="center">
-        {row.cardsCount}
-      </TableCell>
-      <TableCell size={"small"} align="center">
-        {cutter(row.updated, 10)}
-      </TableCell>
-      <TableCell size={"small"} align="center">
-        {cutter(row.user_name, 13)}
-      </TableCell>
-      <TableCell size={"small"} align="center">
-        <IconButton aria-label="read" onClick={navigateHandler}>
-          <SchoolIcon />
-        </IconButton>
-        {userIDfromProfile === row.user_id ? (
-          <>
-            <IconButton aria-label="delete" onClick={() => deleteHandler(row._id)}>
-              <DeleteIcon />
-            </IconButton>
-            <IconButton aria-label="update" onClick={() => updateHandler(row._id)}>
-              <EditIcon />
-            </IconButton>
-          </>
-        ) : (
-          ""
-        )}
-      </TableCell>
-    </TableRow>
-  ));
 
   return (
     <>
@@ -141,7 +94,9 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
           <TableHead>
             <TableRow>{headersData}</TableRow>
           </TableHead>
-          <TableBody>{currentPacks}</TableBody>
+          <TableBody>
+            <CurrentPacks sortedPacks={sortedPacks} />
+          </TableBody>
         </Table>
       </TableContainer>
       {packs.length == 0 && <h1 style={{ textAlign: "center" }}>Empty</h1>}
