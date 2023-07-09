@@ -82,7 +82,6 @@ export const CurrentPacks = ({ sortedPacks }: PropsType) => {
           </TableCell>
         </TableRow>
       ))}
-      ;
     </>
   );
 };

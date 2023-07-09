@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
-
 import { packsActions, packsThunks } from "features/packs/packs.slice";
-
 import styled from "styled-components";
-
 import { AddPack, GetPacksPayload } from "features/packs/packs.api";
-import { Pagination } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { ButtonComponent } from "reusableComponents/ButtonComponent";
 import { useDebounce } from "utils/useDebounce";
 import { loadState } from "utils/localStorage";
 import { Spreadsheet } from "reusableComponents/Spreadsheet";
 import { SearchFilter } from "reusableComponents/SearchFilter";
+import { Pagination } from "reusableComponents/Pagination";
 
 export type HeadersType = {
   name: string;
@@ -47,7 +44,7 @@ export const Packs = () => {
     { name: "name", align: "left" },
     { name: "cards", align: "center" },
     { name: "last updated", align: "center" },
-    { name: "createde by", align: "center" },
+    { name: "created by", align: "center" },
     { name: "actions", align: "center" },
   ];
 
@@ -99,9 +96,9 @@ export const Packs = () => {
         setTitleSearch={setTitleSearch}
         pack={pack}
       />
-      {/*<PaginationStyle>*/}
-      {/*  <Pagination pack={pack} />*/}
-      {/*</PaginationStyle>*/}
+      <PaginationStyle>
+        <Pagination pack={pack} />
+      </PaginationStyle>
     </div>
   );
 };
