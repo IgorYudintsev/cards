@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { HeadersType } from "components/Packs/Packs";
 import { CurrentPacks } from "reusableComponents/CurrentPacks";
+import {SearchFilter} from "./SearchFilter";
 
 type PropsType = {
   tableName: string;

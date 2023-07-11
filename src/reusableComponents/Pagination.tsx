@@ -1,12 +1,13 @@
 import * as React from "react";
+import { useEffect } from "react";
 import TablePagination from "@mui/material/TablePagination";
 
 import { packsThunks } from "features/packs/packs.slice";
-import { useEffect } from "react";
 import { GetPacksPayload } from "features/packs/packs.api";
 import { loadState } from "utils/localStorage";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useDebounce } from "utils/useDebounce";
+import { authThunks } from "../features/auth/auth.slice";
 
 type PropsType = {
   pack: GetPacksPayload;
@@ -18,13 +19,14 @@ export const Pagination = ({ pack }: PropsType) => {
   );
   const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
   const dispatch = useAppDispatch();
-
   const [page, setPage] = React.useState(0);
   const debouncedValue = useDebounce<number>(page, 500);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
-    dispatchFoo();
+    if (page != 0) {
+      dispatchFoo();
+    }
   }, [debouncedValue]);
 
   const dispatchFoo = (newPage: number = page, newRowsPerPage: number = rowsPerPage) => {
@@ -45,6 +47,7 @@ export const Pagination = ({ pack }: PropsType) => {
     const newRowsPerPage = parseInt(event.target.value);
     setRowsPerPage(newRowsPerPage);
     setPage(0);
+    console.log(newRowsPerPage);
     dispatchFoo(0, newRowsPerPage);
   };
 

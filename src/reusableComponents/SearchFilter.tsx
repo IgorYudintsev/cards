@@ -6,6 +6,7 @@ import { deleteState, loadState, saveState } from "utils/localStorage";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useDebounce } from "utils/useDebounce";
 import { ButtonComponent } from "reusableComponents/ButtonComponent";
+import {InputWithoutForm} from "./InputWithoutForm";
 
 type PropsType = {
   titleSearch: string;
@@ -57,7 +58,7 @@ export const SearchFilter: React.FC<PropsType> = (props) => {
 
   return (
     <MainWrapper>
-      {/*<InputWithoutForm title={titleSearch} setTitle={setTitleSearch} pack={pack} />*/}
+      <InputWithoutForm title={titleSearch} setTitle={setTitleSearch} pack={pack} />
       <div>
         <ButtonComponent
           buttonName={"My cards"}
