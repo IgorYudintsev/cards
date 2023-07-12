@@ -8,17 +8,18 @@ import { localHelper } from "utils/localStorage";
 
 type PropsType = {
   title: string;
+  searchValue: string | null;
   setTitle: (title: string) => void;
   pack: GetPacksPayload;
 };
 
-export const InputWithoutForm: React.FC<PropsType> = ({ title, setTitle, pack }) => {
+export const InputWithoutForm: React.FC<PropsType> = ({ searchValue, title, setTitle, pack }) => {
   const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
   const debouncedValue = useDebounce<string>(title, 500);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (debouncedValue !== "") {
+    if (searchValue !== null) {
       dispatch(packsThunks.getPacks(localHelper(userIDfromProfile, pack)));
     }
   }, [debouncedValue]);

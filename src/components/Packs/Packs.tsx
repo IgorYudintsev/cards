@@ -25,6 +25,7 @@ export const Packs = () => {
   const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
   const [valueRange, setValueRange] = React.useState<number[]>([0, 10]); //RANGE
   const [titleSearch, setTitleSearch] = useState(""); //SEARCH
+  const [searchValue, setTitleSearchValue] = useState<string | null>(null); //SEARCH
   const [disabled, setDisabled] = useState(false);
   const debouncedValue = useDebounce<boolean>(disabled, 500);
 
@@ -37,6 +38,7 @@ export const Packs = () => {
 
   useEffect(() => {
     //dispatch(packsThunks.getPacks({ pageCount: 8 }));
+    setTitleSearchValue("ok");
     dispatch(packsThunks.getPacks(loadState() ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 }));
   }, []);
 
@@ -47,10 +49,6 @@ export const Packs = () => {
     { name: "created by", align: "center" },
     { name: "actions", align: "center" },
   ];
-
-  // const addPackHandler = () => {
-  //   setDisabled(!disabled);
-  // };
 
   const addPackHandler = () => {
     setDisabled(true);
@@ -65,23 +63,17 @@ export const Packs = () => {
     }
   }, [debouncedValue]);
 
-  // useEffect(() => {
-  //   const payload: PayloadTypeForUpdate = {
-  //     cardsPack: { name: "MYPACK" },
-  //   };
-  //   dispatch(packsThunks.addPack({ userIDfromProfile: userIDfromProfile, payload }));
-  // }, [debouncedValue]);
-
   return (
     <div>
-      {/*<HeaderBlock>*/}
-      {/*  <h1 style={{ marginTop: "-10px" }}>Packs list</h1>*/}
-      {/*  <ButtonComponent buttonName={"Add new pack"} callback={addPackHandler} disabled={false} />*/}
-      {/*</HeaderBlock>*/}
+      <HeaderBlock>
+        <h1 style={{ marginTop: "-10px" }}>Packs list</h1>
+        <ButtonComponent buttonName={"Add new pack"} callback={addPackHandler} disabled={false} />
+      </HeaderBlock>
       <SearchFilter
         valueRange={valueRange}
         setValueRange={setValueRange}
         titleSearch={titleSearch}
+        searchValue={searchValue}
         setTitleSearch={setTitleSearch}
         pack={pack}
       />
