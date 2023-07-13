@@ -17,11 +17,9 @@ type PropsType = {
 export const CurrentPacks = ({ sortedPacks }: PropsType) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
-  //let [sortedPacks, setSortedPacks] = useState(packs);
+  const isLoading = useAppSelector((state) => state.app.isLoading);
 
-  //let [showCards, setShowCards] = useState(false);
   const cutter = (str: string, cut: number) => {
     if (cut === 13) {
       return str.length > cut ? `${str.slice(0, cut)}...` : str;
@@ -64,15 +62,15 @@ export const CurrentPacks = ({ sortedPacks }: PropsType) => {
             {cutter(row.user_name, 13)}
           </TableCell>
           <TableCell size={"small"} align="center">
-            <IconButton aria-label="read" onClick={navigateHandler}>
+            <IconButton aria-label="read" onClick={navigateHandler} disabled={isLoading}>
               <SchoolIcon />
             </IconButton>
             {userIDfromProfile === row.user_id ? (
               <>
-                <IconButton aria-label="delete" onClick={() => deleteHandler(row._id)}>
+                <IconButton aria-label="delete" onClick={() => deleteHandler(row._id)} disabled={isLoading}>
                   <DeleteIcon />
                 </IconButton>
-                <IconButton aria-label="update" onClick={() => updateHandler(row._id)}>
+                <IconButton aria-label="update" onClick={() => updateHandler(row._id)} disabled={isLoading}>
                   <EditIcon />
                 </IconButton>
               </>

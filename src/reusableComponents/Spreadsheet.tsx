@@ -6,34 +6,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
-import { CardPacks, GetPacksPayload } from "features/packs/packs.api";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { packsThunks } from "features/packs/packs.slice";
-import EditIcon from "@mui/icons-material/Edit";
-import SchoolIcon from "@mui/icons-material/School";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { CardPacks } from "features/packs/packs.api";
 import { HeadersType } from "components/Packs/Packs";
 import { CurrentPacks } from "reusableComponents/CurrentPacks";
-import {SearchFilter} from "./SearchFilter";
 
 type PropsType = {
-  tableName: string;
   packs: CardPacks[];
   headers: HeadersType[];
-  valueRange: number[];
-  setValueRange: (valueRange: number[]) => void;
-  titleSearch: string;
-  setTitleSearch: (titleSearch: string) => void;
-  pack: GetPacksPayload;
 };
 export const Spreadsheet: React.FC<PropsType> = (props) => {
-  const { tableName, packs, headers, valueRange, setValueRange, titleSearch, setTitleSearch, pack } = props;
-  // const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
-  //
-  // const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
+  const { packs, headers } = props;
+
   let [sortedPacks, setSortedPacks] = useState(packs);
   //
   let [showCards, setShowCards] = useState(false);
@@ -54,16 +37,6 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
     setSortedPacks(packs);
   }, [packs]);
 
-  // const updateHandler = (id: string) => {
-  //   const payload = {
-  //     cardsPack: {
-  //       _id: id,
-  //       name: "UPDATED PACK",
-  //     },
-  //   };
-  //   dispatch(packsThunks.updatePack({ payload, userID: userIDfromProfile }));
-  // };
-
   const headersData = headers.map((el) => {
     let currentName = el.name === "cards";
     return (
@@ -83,13 +56,6 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
 
   return (
     <>
-      {/*<SearchFilter*/}
-      {/*  valueRange={valueRange}*/}
-      {/*  setValueRange={setValueRange}*/}
-      {/*  titleSearch={titleSearch}*/}
-      {/*  setTitleSearch={setTitleSearch}*/}
-      {/*  pack={pack}*/}
-      {/*/>*/}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>

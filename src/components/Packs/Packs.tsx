@@ -78,16 +78,7 @@ export const Packs = () => {
         pack={pack}
       />
 
-      <Spreadsheet
-        tableName={"PACKS"}
-        packs={packs}
-        headers={headers}
-        valueRange={valueRange}
-        setValueRange={setValueRange}
-        titleSearch={titleSearch}
-        setTitleSearch={setTitleSearch}
-        pack={pack}
-      />
+      <Spreadsheet packs={packs} headers={headers} />
       <PaginationStyle>
         <Pagination pack={pack} />
       </PaginationStyle>
