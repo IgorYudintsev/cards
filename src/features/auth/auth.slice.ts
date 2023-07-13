@@ -16,11 +16,6 @@ const slice = createSlice({
   name: "auth",
   initialState: {
     profile: null as ProfileType | null,
-    // goToLogin: false as boolean,
-
-    //registred: false as boolean,
-    // error: null as null | string | undefined,
-    // emailSended: false as boolean,
     email: null as null | string,
   },
   reducers: {
