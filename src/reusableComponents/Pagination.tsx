@@ -11,9 +11,11 @@ import { authThunks } from "../features/auth/auth.slice";
 
 type PropsType = {
   pack: GetPacksPayload;
+  rowsPerPage: number;
+  setRowsPerPage: (rowsPerPage: number) => void;
 };
 
-export const Pagination = ({ pack }: PropsType) => {
+export const Pagination = ({ pack, rowsPerPage, setRowsPerPage }: PropsType) => {
   const maxCardsCount: number = useAppSelector((state) =>
     state.packs.cardPacksTotalCount !== null ? state.packs.cardPacksTotalCount : 10
   );
@@ -21,7 +23,7 @@ export const Pagination = ({ pack }: PropsType) => {
   const dispatch = useAppDispatch();
   const [page, setPage] = React.useState(0);
   const debouncedValue = useDebounce<number>(page, 500);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  // const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
     if (page != 0) {

@@ -17,11 +17,12 @@ type PropsType = {
   setTitleSearch: (titleSearch: string) => void;
   valueRange: number[];
   setValueRange: (valueRange: number[]) => void;
+  setRowsPerPage: (rowsPerPage: number) => void;
   pack: GetPacksPayload;
 };
 
 export const SearchFilter: React.FC<PropsType> = (props) => {
-  const { valueRange, setValueRange, titleSearch, setTitleSearch, pack } = props;
+  const { valueRange, setValueRange, titleSearch, setTitleSearch, setRowsPerPage, pack } = props;
   const dispatch = useAppDispatch();
   const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
   const [on, setOn] = useState("");
@@ -40,6 +41,7 @@ export const SearchFilter: React.FC<PropsType> = (props) => {
     dispatch(packsThunks.getPacks(loadState() ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 }));
     setValueRange([0, 10]);
     setTitleSearch("");
+    setRowsPerPage(10);
   };
 
   useEffect(() => {

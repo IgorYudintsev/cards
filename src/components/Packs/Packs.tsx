@@ -26,6 +26,7 @@ export const Packs = () => {
   const [valueRange, setValueRange] = React.useState<number[]>([0, 10]); //RANGE
   const [titleSearch, setTitleSearch] = useState(""); //SEARCH
   const [searchValue, setTitleSearchValue] = useState<string | null>(null); //SEARCH
+  const [rowsPerPage, setRowsPerPage] = React.useState(10); //PAGINATOR
   const [disabled, setDisabled] = useState(false);
   const debouncedValue = useDebounce<boolean>(disabled, 500);
 
@@ -75,12 +76,13 @@ export const Packs = () => {
         titleSearch={titleSearch}
         searchValue={searchValue}
         setTitleSearch={setTitleSearch}
+        setRowsPerPage={setRowsPerPage}
         pack={pack}
       />
 
       <Spreadsheet packs={packs} headers={headers} />
       <PaginationStyle>
-        <Pagination pack={pack} />
+        <Pagination rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} pack={pack} />
       </PaginationStyle>
     </div>
   );

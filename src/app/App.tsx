@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
-import logo from "logo.svg";
-import { Counter } from "features/counter/Counter";
 import "app/App.css";
 import { Header } from "features/appBar/Header/Header";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { authThunks } from "features/auth/auth.slice";
+import { useAppSelector } from "app/hooks";
 
 import LinearProgressVariants from "utils/LinearProgressVariants";
 import { GlobalError } from "reusableComponents/GlobalError";
