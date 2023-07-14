@@ -41,8 +41,8 @@ export const CurrentPacks = ({ sortedPacks }: PropsType) => {
     dispatch(packsThunks.updatePack({ payload, userID: userIDfromProfile }));
   };
 
-  const navigateHandler = () => {
-    navigate("/cards");
+  const navigateHandler = (rowID: string) => {
+    navigate(`/cards/${rowID}`);
   };
 
   return (
@@ -62,7 +62,7 @@ export const CurrentPacks = ({ sortedPacks }: PropsType) => {
             {cutter(row.user_name, 13)}
           </TableCell>
           <TableCell size={"small"} align="center">
-            <IconButton aria-label="read" onClick={navigateHandler} disabled={isLoading}>
+            <IconButton aria-label="read" onClick={() => navigateHandler(row._id)} disabled={isLoading}>
               <SchoolIcon />
             </IconButton>
             {userIDfromProfile === row.user_id ? (

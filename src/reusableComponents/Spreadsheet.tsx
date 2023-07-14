@@ -18,7 +18,6 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
   const { packs, headers } = props;
 
   let [sortedPacks, setSortedPacks] = useState(packs);
-  //
   let [showCards, setShowCards] = useState(false);
   let [sortHandler, setSortHandler] = useState(false);
 
