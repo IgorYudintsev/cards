@@ -9,12 +9,14 @@ import { packsThunks } from "features/packs/packs.slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import { CardPacks } from "features/packs/packs.api";
+import { CardType } from "features/cards/cards.api";
 
 type PropsType = {
-  items: CardPacks[];
+  items: CardType[];
 };
 
-export const CurrentPacks = ({ items }: PropsType) => {
+export const CurrentCards = ({ items }: PropsType) => {
+  console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
@@ -50,27 +52,30 @@ export const CurrentPacks = ({ items }: PropsType) => {
       {items.map((row) => (
         <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
           <TableCell component="th" scope="row">
-            {cutter(row.name, 13)}
+            {cutter(`${row.question}`, 13)}
           </TableCell>
           <TableCell size={"small"} align="center">
-            {row.cardsCount}
+            {cutter(`${row.answer}`, 13)}
           </TableCell>
           <TableCell size={"small"} align="center">
-            {cutter(row.updated, 10)}
+            {cutter(`${row.created}`, 10)}
           </TableCell>
           <TableCell size={"small"} align="center">
-            {cutter(row.user_name, 13)}
+            {cutter(`${row.rating}`, 13)}
           </TableCell>
           <TableCell size={"small"} align="center">
-            <IconButton aria-label="read" onClick={() => navigateHandler(row._id)} disabled={isLoading}>
+            <IconButton aria-label="read" disabled={isLoading}>
+              {/*onClick={() => navigateHandler(row._id)}*/}
               <SchoolIcon />
             </IconButton>
             {userIDfromProfile === row.user_id ? (
               <>
-                <IconButton aria-label="delete" onClick={() => deleteHandler(row._id)} disabled={isLoading}>
+                <IconButton aria-label="delete" disabled={isLoading}>
+                  {/*onClick={() => deleteHandler(row._id)}*/}
                   <DeleteIcon />
                 </IconButton>
-                <IconButton aria-label="update" onClick={() => updateHandler(row._id)} disabled={isLoading}>
+                <IconButton aria-label="update" disabled={isLoading}>
+                  {/*onClick={() => updateHandler(row._id)}*/}
                   <EditIcon />
                 </IconButton>
               </>
@@ -80,7 +85,6 @@ export const CurrentPacks = ({ items }: PropsType) => {
           </TableCell>
         </TableRow>
       ))}
-      {/*<div style={{ display: "flex" }}>{items.length == 0 && <h1 style={{ justifyContent: "center" }}>Empty</h1>}</div>*/}
     </>
   );
 };

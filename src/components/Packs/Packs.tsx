@@ -80,7 +80,7 @@ export const Packs = () => {
         pack={pack}
       />
 
-      <Spreadsheet packs={packs} headers={headers} />
+      <Spreadsheet headers={headers} itemsKey={"packs"} />
       <PaginationStyle>
         <Pagination rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} pack={pack} />
       </PaginationStyle>

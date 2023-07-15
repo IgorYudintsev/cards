@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { cardsApi, CardsPayload } from "features/cards/cards.api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { cardsThunks } from "features/cards/cards.slice";
@@ -18,10 +18,14 @@ import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 
 import TableBody from "@mui/material/TableBody";
+import { Spreadsheet } from "reusableComponents/Spreadsheet";
 
 export const Cards = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const cards = useAppSelector((state) => state.cards.cards);
+  const isLoading = useAppSelector((state) => state.app.isLoading);
+  const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
   let params = useParams();
   let paramsID: string = params.id!.toString();
   const payload: CardsPayload = {
@@ -34,6 +38,7 @@ export const Cards = () => {
     { name: "answer", align: "center" },
     { name: "created", align: "center" },
     { name: "rating", align: "center" },
+    { name: "actions", align: "center" },
   ];
 
   const cutter = (str: string, cut: number) => {
@@ -47,44 +52,15 @@ export const Cards = () => {
     //cardsApi.getCards(payload).then((res) => console.log(res.data));
     dispatch(cardsThunks.getCards(payload));
   }, []);
-  const headersData = headers.map((el) => {
-    return (
-      <TableCell align={el.align}>
-        <h3>
-          <div title={"sort cards"} style={{ cursor: "pointer" }}>
-            {el.name}
-          </div>
-        </h3>
-      </TableCell>
-    );
-  });
+
+  const navigateHandler = (rowID: string) => {
+    console.log("Пошел на...");
+    // navigate(`/cards/${rowID}`);
+  };
+
   return (
     <>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>{headersData}</TableRow>
-          </TableHead>
-          <TableBody>
-            {cards.map((row) => (
-              <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                <TableCell component="th" scope="row">
-                  {row.question}
-                </TableCell>
-                <TableCell size={"small"} align="center">
-                  {row.answer}
-                </TableCell>
-                <TableCell size={"small"} align="center">
-                  {cutter(`${row.created}`, 10)}
-                </TableCell>
-                <TableCell size={"small"} align="center">
-                  {row.rating}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Spreadsheet headers={headers} itemsKey={"cards"} />
       {cards.length == 0 && <h1 style={{ textAlign: "center" }}>Empty</h1>}
     </>
   );
