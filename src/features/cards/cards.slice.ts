@@ -28,7 +28,6 @@ const slice = createSlice({
 const getCards = createAppAsyncThunk<any, CardsPayload>("cards/getCards", async (arg, thunkAPI) => {
   return thunkTryCatch(thunkAPI, async () => {
     let res = await cardsApi.getCards(arg);
-    console.log(res.data);
     return res.data;
   });
 });

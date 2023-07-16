@@ -9,6 +9,7 @@ import { packsThunks } from "features/packs/packs.slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import { CardPacks } from "features/packs/packs.api";
+import { cutter } from "utils/cutter";
 
 type PropsType = {
   items: CardPacks[];
@@ -19,13 +20,6 @@ export const CurrentPacks = ({ items }: PropsType) => {
   const navigate = useNavigate();
   const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
   const isLoading = useAppSelector((state) => state.app.isLoading);
-
-  const cutter = (str: string, cut: number) => {
-    if (cut === 13) {
-      return str.length > cut ? `${str.slice(0, cut)}...` : str;
-    }
-    return str.length > cut ? `${str.slice(0, cut)}` : str;
-  };
 
   const deleteHandler = (id: string) => {
     dispatch(packsThunks.deletePack({ idForDelete: id, userID: userIDfromProfile }));
@@ -80,7 +74,6 @@ export const CurrentPacks = ({ items }: PropsType) => {
           </TableCell>
         </TableRow>
       ))}
-      {/*<div style={{ display: "flex" }}>{items.length == 0 && <h1 style={{ justifyContent: "center" }}>Empty</h1>}</div>*/}
     </>
   );
 };

@@ -35,7 +35,6 @@ const slice = createSlice({
       .addMatcher(
         (action) => action.type.endsWith("/fulfilled"),
         (state, action) => {
-          console.log(action.type);
           state.isLoading = false;
         }
       )

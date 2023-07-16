@@ -56,7 +56,7 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
           </TableBody>
         </Table>
       </TableContainer>
-      {items.length == 0 && <h1 style={{ textAlign: "center" }}>Empty</h1>}
+      {items.length === 0 || (cards.length === 0 && <h1 style={{ textAlign: "center" }}>Empty</h1>)}
     </>
   );
 };

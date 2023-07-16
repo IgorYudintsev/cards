@@ -10,38 +10,37 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import { CardPacks } from "features/packs/packs.api";
 import { CardType } from "features/cards/cards.api";
+import { cutter } from "utils/cutter";
+import { authThunks } from "features/auth/auth.slice";
 
 type PropsType = {
   items: CardType[];
 };
 
 export const CurrentCards = ({ items }: PropsType) => {
-  console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
+  //const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
   const isLoading = useAppSelector((state) => state.app.isLoading);
 
-  const cutter = (str: string, cut: number) => {
-    if (cut === 13) {
-      return str.length > cut ? `${str.slice(0, cut)}...` : str;
-    }
-    return str.length > cut ? `${str.slice(0, cut)}` : str;
-  };
+  // useEffect(() => {
+  //   console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+  //   dispatch(authThunks.authMe());
+  // }, []);
 
-  const deleteHandler = (id: string) => {
-    dispatch(packsThunks.deletePack({ idForDelete: id, userID: userIDfromProfile }));
-  };
-
-  const updateHandler = (id: string) => {
-    const payload = {
-      cardsPack: {
-        _id: id,
-        name: "UPDATED PACK",
-      },
-    };
-    dispatch(packsThunks.updatePack({ payload, userID: userIDfromProfile }));
-  };
+  // const deleteHandler = (id: string) => {
+  //   dispatch(packsThunks.deletePack({ idForDelete: id, userID: userIDfromProfile }));
+  // };
+  //
+  // const updateHandler = (id: string) => {
+  //   const payload = {
+  //     cardsPack: {
+  //       _id: id,
+  //       name: "UPDATED PACK",
+  //     },
+  //   };
+  //   dispatch(packsThunks.updatePack({ payload, userID: userIDfromProfile }));
+  // };
 
   const navigateHandler = (rowID: string) => {
     navigate(`/cards/${rowID}`);
@@ -68,23 +67,24 @@ export const CurrentCards = ({ items }: PropsType) => {
               {/*onClick={() => navigateHandler(row._id)}*/}
               <SchoolIcon />
             </IconButton>
-            {userIDfromProfile === row.user_id ? (
-              <>
-                <IconButton aria-label="delete" disabled={isLoading}>
-                  {/*onClick={() => deleteHandler(row._id)}*/}
-                  <DeleteIcon />
-                </IconButton>
-                <IconButton aria-label="update" disabled={isLoading}>
-                  {/*onClick={() => updateHandler(row._id)}*/}
-                  <EditIcon />
-                </IconButton>
-              </>
-            ) : (
-              ""
-            )}
+            {/*{userIDfromProfile === row.user_id ? (*/}
+            {/*  <>*/}
+            {/*    <IconButton aria-label="delete" disabled={isLoading}>*/}
+            {/*      /!*onClick={() => deleteHandler(row._id)}*!/*/}
+            {/*      <DeleteIcon />*/}
+            {/*    </IconButton>*/}
+            {/*    <IconButton aria-label="update" disabled={isLoading}>*/}
+            {/*      /!*onClick={() => updateHandler(row._id)}*!/*/}
+            {/*      <EditIcon />*/}
+            {/*    </IconButton>*/}
+            {/*  </>*/}
+            {/*) : (*/}
+            {/*  ""*/}
+            {/*)}*/}
           </TableCell>
         </TableRow>
       ))}
+      {/*{items.length === 0 && <h1 style={{ textAlign: "center" }}>Empty</h1>}*/}
     </>
   );
 };
