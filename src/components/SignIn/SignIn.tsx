@@ -11,6 +11,7 @@ export const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const logined = useAppSelector((state) => state.auth.profile);
+  const cardsPack_id = sessionStorage.getItem("cardsPack_id");
 
   logined ? navigate("/packs") : dispatch(authThunks.authMe());
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { CardsPayload } from "features/cards/cards.api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { cardsThunks } from "features/cards/cards.slice";
@@ -9,24 +9,19 @@ import { authThunks } from "features/auth/auth.slice";
 
 export const Cards = () => {
   const dispatch = useAppDispatch();
+  const logined = useAppSelector((state) => state.auth.profile);
 
   let params = useParams();
   let paramsID: string = params.id!.toString();
   const navigate = useNavigate();
+  // const location = useLocation();
+  //
+  // console.log(location);
+
   const payload: CardsPayload = {
     cardsPack_id: paramsID,
     pageCount: 10,
   };
-  console.log(navigate);
-  useEffect(() => {
-    dispatch(authThunks.authMe());
-  }, []);
-
-  // const logined = useAppSelector((state) => state.auth.profile);
-  // if (!logined) {
-  //   console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
-  //   dispatch(authThunks.authMe());
-  // }
 
   const headers: HeadersType[] = [
     { name: "question", align: "left" },
@@ -38,8 +33,13 @@ export const Cards = () => {
 
   useEffect(() => {
     //cardsApi.getCards(payload).then((res) => console.log(res.data));
+    sessionStorage.setItem("cardsPack_id", paramsID);
     dispatch(cardsThunks.getCards(payload));
   }, []);
+
+  // if (!logined) {
+  //   dispatch(authThunks.authMe());
+  // }
 
   const navigateHandler = (rowID: string) => {
     console.log("Пошел на...");

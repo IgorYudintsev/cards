@@ -10,25 +10,31 @@ import { CardPacks } from "features/packs/packs.api";
 import { HeadersType } from "components/Packs/Packs";
 import { CurrentPacks } from "reusableComponents/CurrentPacks";
 import { TableHeader } from "reusableComponents/TableHeader";
-import { useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { CurrentCards } from "reusableComponents/CurrentCards";
+import { useLocation } from "react-router-dom";
+import { authThunks } from "features/auth/auth.slice";
 
 type PropsType = {
   headers: HeadersType[];
   itemsKey: "packs" | "cards";
 };
 export const Spreadsheet: React.FC<PropsType> = (props) => {
+  const dispatch = useAppDispatch();
+  const logined = useAppSelector((state) => state.auth.profile);
   const { headers, itemsKey } = props;
   const cards = useAppSelector((state) => state.cards.cards);
   let [showCards, setShowCards] = useState(false);
+  const packs = useAppSelector((state) => state.packs.cardPacks);
+  const location = useLocation();
+  const locationName = location.pathname.split("/")[1] === "packs" ? packs : cards;
 
-  const items = useAppSelector((state) => state.packs.cardPacks);
-  let [sortedPacks, setSortedPacks] = useState(items);
+  let [sortedPacks, setSortedPacks] = useState(packs);
   let [sortHandler, setSortHandler] = useState(false);
 
   const sort = () => {
     setSortHandler(!sortHandler);
-    let packData = [...items];
+    let packData = [...packs];
     if (sortHandler) {
       setSortedPacks(packData.sort((a, b) => a.cardsCount - b.cardsCount));
     }
@@ -38,8 +44,8 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
   };
 
   useEffect(() => {
-    setSortedPacks(items);
-  }, [items]);
+    setSortedPacks(packs);
+  }, [packs]);
 
   return (
     <>
@@ -51,12 +57,11 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {itemsKey === "packs" && <CurrentPacks items={sortedPacks} />}
-            {itemsKey === "cards" && <CurrentCards items={cards} />}
+            {location.pathname === "/packs" ? <CurrentPacks items={sortedPacks} /> : <CurrentCards items={cards} />}
           </TableBody>
         </Table>
       </TableContainer>
-      {items.length === 0 || (cards.length === 0 && <h1 style={{ textAlign: "center" }}>Empty</h1>)}
+      {locationName.length === 0 && <h1 style={{ textAlign: "center" }}>Empty</h1>}
     </>
   );
 };

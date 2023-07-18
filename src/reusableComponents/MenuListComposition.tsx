@@ -49,6 +49,7 @@ export default function MenuListComposition() {
   }, [open]);
 
   const logOutHandler = () => {
+    sessionStorage.setItem("cardsPack_id", "goToPacks");
     dispatch(authThunks.logout());
     navigate("/sign-in");
   };

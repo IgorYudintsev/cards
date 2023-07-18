@@ -39,6 +39,7 @@ export const Packs = () => {
 
   useEffect(() => {
     //dispatch(packsThunks.getPacks({ pageCount: 8 }));
+    sessionStorage.setItem("cardsPack_id", "goToPacks");
     setTitleSearchValue("ok");
     dispatch(packsThunks.getPacks(loadState() ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 }));
   }, []);

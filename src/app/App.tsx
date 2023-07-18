@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "app/App.css";
 import { Header } from "features/appBar/Header/Header";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -11,10 +11,14 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const isLoading = useAppSelector((state) => state.app.isLoading);
+  const cardsPack_id = sessionStorage.getItem("cardsPack_id");
 
   useEffect(() => {
-    if (location.pathname == "/") {
+    if (location.pathname === "/") {
       navigate("/sign-in");
+    }
+    if (cardsPack_id === null) {
+      sessionStorage.setItem("cardsPack_id", "goToPacks");
     }
   }, []);
 
