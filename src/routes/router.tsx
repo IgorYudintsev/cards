@@ -61,7 +61,12 @@ export const router = createBrowserRouter([
 
       {
         path: "cards/:id",
-        element: <Cards />,
+        element: (
+          <ProtectedRoute>
+            <Cards />
+          </ProtectedRoute>
+        ),
+
         // ErrorBoundary: ErrorPage,
       },
 
@@ -79,59 +84,3 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-
-//
-// export const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App/>
-//     errorElement: <ErrorPage />,
-//     children: [
-//       {
-//         path: "sign-in",
-//         element: SignIn(),
-//         // ErrorBoundary: ErrorPage,
-//       },
-//       {
-//         path: "sign-up",
-//         element: SignUp(),
-//         // ErrorBoundary: ErrorPage,
-//       },
-//       {
-//         path: "check-email",
-//         element: CheckEmail(),
-//         // ErrorBoundary: ErrorPage,
-//       },
-//       {
-//         path: "set-new-password",
-//         element: SetNewPassword(),
-//         // ErrorBoundary: ErrorPage,
-//       },
-//       {
-//         path: "forgot-password",
-//         element: ForgotPassword(),
-//         // ErrorBoundary: ErrorPage,
-//       },
-//       {
-//         path: "profile",
-//         element: Profile(),
-//         // ErrorBoundary: ErrorPage,
-//       },
-//       {
-//         path: "packs",
-//         element: Packs(),
-//         // ErrorBoundary: ErrorPage,
-//       },
-//       {
-//         path: "cards",
-//         element: Cards(),
-//         // ErrorBoundary: ErrorPage,
-//       },
-//       {
-//         path: "learn/:cardId",
-//         element: Learn(),
-//         // ErrorBoundary: ErrorPage,
-//       },
-//     ],
-//   },
-// ]);

@@ -13,8 +13,10 @@ export const SignIn = () => {
   const logined = useAppSelector((state) => state.auth.profile);
   const cardsPack_id = sessionStorage.getItem("cardsPack_id");
 
-  logined ? navigate("/packs") : dispatch(authThunks.authMe());
-
+  //logined ? navigate("/packs") : dispatch(authThunks.authMe());
+  if (logined) {
+    navigate("/packs");
+  }
   const queryLogin = (payload: ArgLoginType) => {
     dispatch(authThunks.login(payload))
       .unwrap() //благодаря unwrap() -мы отрабатываем положительные или отрицательные кейсы
