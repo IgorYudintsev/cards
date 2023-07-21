@@ -24,7 +24,7 @@ export const packsApi = {
 };
 
 export type GetPacksPayload = {
-  packName?: string;
+  packName?: string | null;
   min?: number;
   max?: number;
   sortPacks?: any;

@@ -10,10 +10,8 @@ type PropsType = {
 
 export const ProtectedRoute: React.FC<PropsType> = ({ children }) => {
   const logined = useAppSelector((state) => state.auth.profile);
-  console.log("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-  return <Navigate to="/sign-in" />;
 
-  //return logined ? <Outlet /> : <Navigate to="sign-in" />;
+  return logined ? children : <Navigate to="/sign-in" />;
   // if (!logined) {
   //   return <Navigate to="/sign-in" />;
   // }

@@ -48,7 +48,7 @@ export const Cards = () => {
 
   return (
     <>
-      <Spreadsheet headers={headers} itemsKey={"cards"} />
+      <Spreadsheet headers={headers} />
     </>
   );
 };

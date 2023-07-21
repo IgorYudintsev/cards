@@ -5,12 +5,11 @@ import { HeadersType } from "components/Packs/Packs";
 
 type PropsType = {
   headers: HeadersType[];
-  setShowCards: (showCards: boolean) => void;
   sort: () => void;
 };
 
 export const TableHeader: React.FC<PropsType> = (props) => {
-  const { headers, setShowCards, sort } = props;
+  const { headers, sort } = props;
 
   return (
     <>
@@ -18,7 +17,7 @@ export const TableHeader: React.FC<PropsType> = (props) => {
         let currentName = el.name === "cards";
         return (
           <TableCell align={el.align}>
-            <h3 onMouseOver={() => setShowCards(true)} onMouseLeave={() => setShowCards(false)}>
+            <h3>
               {currentName ? (
                 <div title={"sort cards"} style={{ cursor: "pointer" }} onClick={() => sort()}>
                   {el.name}

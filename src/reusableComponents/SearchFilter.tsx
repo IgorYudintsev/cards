@@ -12,9 +12,10 @@ import IconButton from "@mui/material/IconButton";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
 
 type PropsType = {
-  titleSearch: string;
-  searchValue: string | null;
-  setTitleSearch: (titleSearch: string) => void;
+  //titleSearch: string;
+  titleSearch: string | null;
+  //setTitleSearch: (titleSearch: string) => void;
+  setTitleSearch: (titleSearch: string | null) => void;
   valueRange: number[];
   setValueRange: (valueRange: number[]) => void;
   setRowsPerPage: (rowsPerPage: number) => void;
@@ -22,7 +23,16 @@ type PropsType = {
 };
 
 export const SearchFilter: React.FC<PropsType> = (props) => {
-  const { valueRange, setValueRange, titleSearch, setTitleSearch, setRowsPerPage, pack } = props;
+  const {
+    valueRange,
+    setValueRange,
+    //searchValue,
+    titleSearch,
+    setTitleSearch,
+    setRowsPerPage,
+    pack,
+    //setTitleSearchValue,
+  } = props;
   const dispatch = useAppDispatch();
   const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
   const [on, setOn] = useState("");
@@ -40,6 +50,7 @@ export const SearchFilter: React.FC<PropsType> = (props) => {
   const cleanHandler = () => {
     dispatch(packsThunks.getPacks(loadState() ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 }));
     setValueRange([0, 10]);
+    //setTitleSearch("");
     setTitleSearch("");
     setRowsPerPage(10);
   };
@@ -64,7 +75,14 @@ export const SearchFilter: React.FC<PropsType> = (props) => {
 
   return (
     <MainWrapper>
-      <InputWithoutForm searchValue={props.searchValue} title={titleSearch} setTitle={setTitleSearch} pack={pack} />
+      <InputWithoutForm
+        //searchValue={searchValue}
+        // title={titleSearch}
+        // setTitle={setTitleSearch}
+        titleSearch={titleSearch}
+        setTitleSearch={setTitleSearch}
+        pack={pack}
+      />
       <div>
         <ButtonComponent
           buttonName={"My cards"}

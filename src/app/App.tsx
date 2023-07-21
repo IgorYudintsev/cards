@@ -16,17 +16,14 @@ function App() {
   const cardsPack_id = sessionStorage.getItem("cardsPack_id");
   const logined = useAppSelector((state) => state.auth.profile);
 
-  // logined ? navigate("/packs") : dispatch(authThunks.authMe());
-
   useEffect(() => {
-    // if (logined) {
-    navigate("/packs");
-    // }
-  }, []);
-
-  // if (logined) {
-  //   navigate("/packs");
-  // }
+    if (!logined) {
+      dispatch(authThunks.authMe());
+    }
+    if (logined) {
+      navigate("/packs");
+    }
+  }, [logined]);
 
   // useEffect(() => {
   //   if (location.pathname === "/") {
@@ -40,7 +37,7 @@ function App() {
   return (
     <div className="App">
       <Header disabled={false} />
-      {/*{isLoading && <LinearProgressVariants />}*/}
+      {isLoading && <LinearProgressVariants />}
       <div>
         <Outlet />
       </div>

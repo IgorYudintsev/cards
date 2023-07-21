@@ -14,14 +14,15 @@ export const SignIn = () => {
   const cardsPack_id = sessionStorage.getItem("cardsPack_id");
 
   //logined ? navigate("/packs") : dispatch(authThunks.authMe());
-  if (logined) {
-    navigate("/packs");
-  }
+  // if (logined) {
+  //   navigate("/packs");
+  // }
   const queryLogin = (payload: ArgLoginType) => {
     dispatch(authThunks.login(payload))
       .unwrap() //благодаря unwrap() -мы отрабатываем положительные или отрицательные кейсы
       .then((res) => {
         toast.success("Вы успешно залогинились");
+        navigate("/packs");
       })
       .catch((err) => {
         toast.error("Залогиниться не удалось");
