@@ -15,13 +15,14 @@ function App() {
   const isLoading = useAppSelector((state) => state.app.isLoading);
   const cardsPack_id = sessionStorage.getItem("cardsPack_id");
   const logined = useAppSelector((state) => state.auth.profile);
+  const currentPath = sessionStorage.getItem("cardsPATH"); //из sessionStorage получаем путь где мы до этого были, чтобы вернуться сюда же при перезагрузке страницы
 
   useEffect(() => {
     if (!logined) {
       dispatch(authThunks.authMe());
     }
     if (logined) {
-      navigate("/packs");
+      navigate(`${currentPath}`);
     }
   }, [logined]);
 

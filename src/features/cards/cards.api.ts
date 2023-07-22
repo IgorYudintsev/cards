@@ -2,13 +2,12 @@ import { instance } from "common/api/common.api";
 
 export const cardsApi = {
   getCards: (payload: CardsPayload) => {
-    // console.log({ ...payload });
     return instance.get<ResponseCardType>("cards/card", { params: { ...payload } });
   },
 
-  // addPack: (payload: { cardsPack: AddPack }) => {
-  //     return instance.post("cards/pack", payload);
-  // },
+  addCard: (payload: AddCardType) => {
+    return instance.post("cards/card", { card: { ...payload } });
+  },
 
   // deletePack: (packId: string) => {
   //   console.log(packId);
@@ -57,4 +56,16 @@ export type CardType = {
   updated?: string;
   __v?: 0;
   _id?: string;
+};
+
+export type AddCardType = {
+  cardsPack_id: string;
+  question?: string;
+  answer?: string;
+  grade?: number;
+  shots?: number;
+  answerImg?: string;
+  questionImg?: string;
+  questionVideo?: string;
+  answerVideo?: string;
 };

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { packsInitialState } from "features/packs/packs.slice";
 import { createAppAsyncThunk, thunkTryCatch } from "utils";
 import { GetPacksPayload, packsApi } from "features/packs/packs.api";
-import { cardsApi, CardsPayload, CardType, ResponseCardType } from "features/cards/cards.api";
+import { AddCardType, cardsApi, CardsPayload, CardType, ResponseCardType } from "features/cards/cards.api";
 
 export const cardsInitialState: ResponseCardType = {
   cards: [],
@@ -32,6 +32,19 @@ const getCards = createAppAsyncThunk<any, CardsPayload>("cards/getCards", async 
   });
 });
 
+const addCard = createAppAsyncThunk<any, AddCardType>("cards/addCard", async (arg, thunkAPI) => {
+  return thunkTryCatch(thunkAPI, async () => {
+    const { dispatch, rejectWithValue } = thunkAPI;
+    await cardsApi.addCard(arg);
+    dispatch(
+      getCards({
+        cardsPack_id: arg.cardsPack_id,
+        pageCount: 10,
+      })
+    );
+  });
+});
+
 export const cardsReducer = slice.reducer;
 export const cardsActions = slice.actions;
-export const cardsThunks = { getCards };
+export const cardsThunks = { getCards, addCard };

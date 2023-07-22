@@ -9,6 +9,7 @@ import { loadState } from "utils/localStorage";
 import { Spreadsheet } from "reusableComponents/Spreadsheet";
 import { SearchFilter } from "reusableComponents/SearchFilter";
 import { Pagination } from "reusableComponents/Pagination";
+import { S } from "features/cardsPacksStyles/CardsPacks_styles";
 
 export type HeadersType = {
   name: string;
@@ -58,16 +59,18 @@ export const Packs = () => {
 
   useEffect(() => {
     //dispatch(packsThunks.getPacks({ pageCount: 8 }));
-    sessionStorage.setItem("cardsPack_id", "goToPacks");
+    sessionStorage.setItem("cardsPATH", "/packs");
+
+    // sessionStorage.setItem("cardsPack_id", "goToPacks");
     dispatch(packsThunks.getPacks(loadState() ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 }));
   }, []);
 
   return (
     <div>
-      <HeaderBlock>
+      <S.HeaderBlock>
         <h1 style={{ marginTop: "-10px" }}>Packs list</h1>
         <ButtonComponent buttonName={"Add new pack"} callback={addPackHandler} disabled={false} />
-      </HeaderBlock>
+      </S.HeaderBlock>
       <SearchFilter
         valueRange={valueRange}
         setValueRange={setValueRange}
@@ -77,20 +80,9 @@ export const Packs = () => {
         pack={pack}
       />
       <Spreadsheet headers={headers} />
-      <PaginationStyle>
+      <S.PaginationStyle>
         <Pagination rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} pack={pack} />
-      </PaginationStyle>
+      </S.PaginationStyle>
     </div>
   );
 };
-
-const PaginationStyle = styled.div`
-  margin-left: 28%;
-`;
-
-const HeaderBlock = styled.div`
-  margin-top: 20px;
-  height: 35px;
-  display: flex;
-  justify-content: space-around;
-`;
