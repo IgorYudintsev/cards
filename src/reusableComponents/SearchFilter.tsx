@@ -85,14 +85,14 @@ export const SearchFilter: React.FC<PropsType> = (props) => {
       />
       <div>
         <ButtonComponent
-          buttonName={"My cards"}
+          buttonName={"My packs"}
           //callback={myHandler}
           callback={() => setOn("MY")}
           disabled={false}
           variant={loadState() ? "outlined" : "contained"}
         />
         <ButtonComponent
-          buttonName={"All cards"}
+          buttonName={"All packs"}
           //callback={allHandler}
           callback={() => setOn("ALL")}
           disabled={false}

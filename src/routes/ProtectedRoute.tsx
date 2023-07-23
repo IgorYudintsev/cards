@@ -12,19 +12,4 @@ export const ProtectedRoute: React.FC<PropsType> = ({ children }) => {
   const logined = useAppSelector((state) => state.auth.profile);
 
   return logined ? children : <Navigate to="/sign-in" />;
-  // if (!logined) {
-  //   return <Navigate to="/sign-in" />;
-  // }
-  // return children;
 };
-
-// import { Navigate, Outlet } from 'react-router-dom'
-//
-// import { useAppSelector } from '../../hooks/reduxHooks'
-// import { PATH } from '../../utils/path'
-//
-// export const PrivateRoutes = () => {
-//   const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-//
-//   return isLoggedIn ? <Outlet /> : <Navigate to={PATH.LOGIN} />
-//}

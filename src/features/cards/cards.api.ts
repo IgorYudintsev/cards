@@ -9,10 +9,15 @@ export const cardsApi = {
     return instance.post("cards/card", { card: { ...payload } });
   },
 
-  // deletePack: (packId: string) => {
-  //   console.log(packId);
-  //   return instance.delete(`cards/pack?id=${packId}`);
-  // },
+  updateCard: (payload: CardType) => {
+    return instance.put("cards/card", { card: { ...payload } });
+  },
+
+  deleteCard: (cardId: string) => {
+    console.log(cardId);
+    return instance.delete(`cards/card?id=${cardId}`);
+  },
+
   // deletePack: (packId: string) => {
   //     return instance.delete(`cards/pack`, { params: { id: packId } });
   // },
@@ -46,7 +51,7 @@ export type ResponseCardType = {
 export type CardType = {
   answer?: string;
   question?: string;
-  cardsPack_id?: string;
+  cardsPack_id: string;
   grade?: number;
   rating?: number;
   shots?: number;

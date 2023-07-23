@@ -45,6 +45,35 @@ const addCard = createAppAsyncThunk<any, AddCardType>("cards/addCard", async (ar
   });
 });
 
+const updateCard = createAppAsyncThunk<any, CardType>("cards/updateCard", async (arg, thunkAPI) => {
+  return thunkTryCatch(thunkAPI, async () => {
+    const { dispatch, rejectWithValue } = thunkAPI;
+    await cardsApi.updateCard(arg);
+    dispatch(
+      getCards({
+        cardsPack_id: arg.cardsPack_id,
+        pageCount: 10,
+      })
+    );
+  });
+});
+
+const deleteCard = createAppAsyncThunk<any, { userID: string; cardsPack_id: string }>(
+  "cards/deleteCard",
+  async (arg, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+      const { dispatch, rejectWithValue } = thunkAPI;
+      await cardsApi.deleteCard(arg.userID);
+      dispatch(
+        getCards({
+          cardsPack_id: arg.cardsPack_id,
+          pageCount: 10,
+        })
+      );
+    });
+  }
+);
+
 export const cardsReducer = slice.reducer;
 export const cardsActions = slice.actions;
-export const cardsThunks = { getCards, addCard };
+export const cardsThunks = { getCards, addCard, deleteCard, updateCard };
