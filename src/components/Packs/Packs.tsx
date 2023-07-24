@@ -47,6 +47,7 @@ export const Packs = () => {
   const addPackHandler = () => {
     setDisabled(true);
   };
+
   useEffect(() => {
     const payload: PayloadTypeForUpdate = {
       cardsPack: { name: "MYPACK" },

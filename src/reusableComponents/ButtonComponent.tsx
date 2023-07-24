@@ -9,17 +9,17 @@ type PropsType = {
 };
 
 export const ButtonComponent: React.FC<PropsType> = ({
-  buttonName,
-  callback,
-  disabled = false,
-  variant = "contained",
-}) => {
+                                                       buttonName,
+                                                       callback,
+                                                       disabled = false,
+                                                       variant = "contained",
+                                                     }) => {
   const onclickHandler = () => {
     callback();
   };
   return (
-    <Button style={{ marginLeft: "3px" }} variant={variant} type="submit" onClick={onclickHandler} disabled={disabled}>
-      {buttonName}
-    </Button>
+      <Button style={{ marginLeft: "3px" }} variant={variant} type="submit" onClick={onclickHandler} disabled={disabled}>
+        {buttonName}
+      </Button>
   );
 };
