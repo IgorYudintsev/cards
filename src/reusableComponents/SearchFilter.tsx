@@ -89,14 +89,14 @@ export const SearchFilter: React.FC<PropsType> = (props) => {
           //callback={myHandler}
           callback={() => setOn("MY")}
           disabled={false}
-          variant={loadState() ? "outlined" : "contained"}
+          variant={loadState() ? "contained" : "outlined"}
         />
         <ButtonComponent
           buttonName={"All packs"}
           //callback={allHandler}
           callback={() => setOn("ALL")}
           disabled={false}
-          variant={!loadState() ? "outlined" : "contained"}
+          variant={!loadState() ? "contained" : "outlined"}
         />
       </div>
       <RangeSlider value={valueRange} setValue={setValueRange} pack={pack} />

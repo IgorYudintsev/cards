@@ -23,8 +23,10 @@ function App() {
           navigate("/sign-in");
         });
     }
-    if (logined) {
+    if (logined && currentPath) {
       navigate(`${currentPath}`);
+    } else {
+      navigate("/packs");
     }
   }, [logined]);
 
