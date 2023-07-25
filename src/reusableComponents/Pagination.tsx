@@ -10,16 +10,25 @@ import { useDebounce } from "utils/useDebounce";
 import { authThunks } from "../features/auth/auth.slice";
 
 type PropsType = {
-  payload: GetPacksPayload;
+  //payload: GetPacksPayload;
   rowsPerPage: number;
   setRowsPerPage: (rowsPerPage: number) => void;
   payloadKey: "cards" | "packs";
+  dispatchFoo: (newPage: number, newRowsPerPage: number) => void;
 };
 
-export const Pagination = ({ payload, rowsPerPage, setRowsPerPage }: PropsType) => {
-  const maxCardsCount: number = useAppSelector((state) =>
+export const Pagination = ({ rowsPerPage, setRowsPerPage, payloadKey, dispatchFoo }: PropsType) => {
+  // const maxCardsCount: number = useAppSelector((state) =>
+  //   state.packs.cardPacksTotalCount !== null ? state.packs.cardPacksTotalCount : 10
+  // );
+
+  const maxCountPacks: number = useAppSelector((state) =>
     state.packs.cardPacksTotalCount !== null ? state.packs.cardPacksTotalCount : 10
   );
+  const maxCountCards: number = useAppSelector((state) =>
+    state.cards.cardsTotalCount !== null ? state.cards.cardsTotalCount : 10
+  );
+
   const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
   const dispatch = useAppDispatch();
   const [page, setPage] = React.useState(0);
@@ -28,19 +37,19 @@ export const Pagination = ({ payload, rowsPerPage, setRowsPerPage }: PropsType) 
 
   useEffect(() => {
     if (page != 0) {
-      dispatchFoo();
+      dispatchFoo(page, rowsPerPage);
     }
   }, [debouncedValue]);
 
-  const dispatchFoo = (newPage: number = page, newRowsPerPage: number = rowsPerPage) => {
-    dispatch(
-      packsThunks.getPacks(
-        loadState()
-          ? { ...payload, user_id: userIDfromProfile, page: newPage + 1, pageCount: newRowsPerPage }
-          : { ...payload, page: newPage + 1, pageCount: newRowsPerPage }
-      )
-    );
-  };
+  // const dispatchFoo = (newPage: number = page, newRowsPerPage: number = rowsPerPage) => {
+  //   dispatch(
+  //     packsThunks.getPacks(
+  //       loadState()
+  //         ? { ...payload, user_id: userIDfromProfile, page: newPage + 1, pageCount: newRowsPerPage }
+  //         : { ...payload, page: newPage + 1, pageCount: newRowsPerPage }
+  //     )
+  //   );
+  // };
 
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage);
@@ -50,14 +59,13 @@ export const Pagination = ({ payload, rowsPerPage, setRowsPerPage }: PropsType) 
     const newRowsPerPage = parseInt(event.target.value);
     setRowsPerPage(newRowsPerPage);
     setPage(0);
-    console.log(newRowsPerPage);
     dispatchFoo(0, newRowsPerPage);
   };
 
   return (
     <TablePagination
       component="div"
-      count={maxCardsCount}
+      count={payloadKey === "packs" ? maxCountPacks : maxCountCards}
       page={page}
       onPageChange={handleChangePage}
       rowsPerPage={rowsPerPage}

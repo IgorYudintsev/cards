@@ -10,6 +10,8 @@ import { S } from "features/cardsPacksStyles/CardsPacks_styles";
 import { ButtonComponent } from "reusableComponents/ButtonComponent";
 import { Pagination } from "reusableComponents/Pagination";
 import { GetPacksPayload } from "features/packs/packs.api";
+import { packsThunks } from "features/packs/packs.slice";
+import { loadState } from "utils/localStorage";
 
 export const Cards = () => {
   const dispatch = useAppDispatch();
@@ -30,9 +32,9 @@ export const Cards = () => {
     // packName: titleSearch,
   };
 
-  const payloadAddCard: AddCardType = {
-    cardsPack_id: paramsID,
-  };
+  // const payloadAddCard: AddCardType = {
+  //   cardsPack_id: paramsID,
+  // };
 
   const headers: HeadersType[] = [
     { name: "question", align: "left" },
@@ -42,6 +44,10 @@ export const Cards = () => {
     { name: "actions", align: "center" },
   ];
 
+  const dispatchFoo = (newPage: number, newRowsPerPage: number) => {
+    dispatch(cardsThunks.getCards({ ...cards, page: newPage + 1, pageCount: newRowsPerPage }));
+  };
+
   useEffect(() => {
     //cardsApi.getCards(payload).then((res) => console.log(res.data));
     sessionStorage.setItem("cardsPATH", location.pathname);
@@ -49,22 +55,27 @@ export const Cards = () => {
   }, []);
 
   const addCardHandler = () => {
-    dispatch(cardsThunks.addCard(payloadAddCard));
+    dispatch(cardsThunks.addCard(cards));
   };
 
   return (
     <>
-      {/*<S.HeaderBlock>*/}
-      {/*  <h1 style={{ marginTop: "-10px" }}>Cards list</h1>*/}
-      {/*  <ButtonComponent*/}
-      {/*    buttonName={"Add new card"}*/}
-      {/*    callback={addCardHandler}*/}
-      {/*    disabled={userIDfromProfile !== paramsUserID}*/}
-      {/*  />*/}
-      {/*</S.HeaderBlock>*/}
+      <S.HeaderBlock>
+        <h1 style={{ marginTop: "-10px" }}>Cards list</h1>
+        <ButtonComponent
+          buttonName={"Add new card"}
+          callback={addCardHandler}
+          disabled={userIDfromProfile !== paramsUserID}
+        />
+      </S.HeaderBlock>
       <Spreadsheet headers={headers} />
       <S.PaginationStyle>
-        {/*<Pagination rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} payload={cards} payloadKey={"cards"} />*/}
+        <Pagination
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
+          payloadKey={"cards"}
+          dispatchFoo={dispatchFoo}
+        />
       </S.PaginationStyle>
     </>
   );

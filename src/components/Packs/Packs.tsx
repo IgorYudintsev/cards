@@ -48,6 +48,16 @@ export const Packs = () => {
     setDisabled(true);
   };
 
+  const dispatchFoo = (newPage: number, newRowsPerPage: number) => {
+    dispatch(
+      packsThunks.getPacks(
+        loadState()
+          ? { ...pack, user_id: userIDfromProfile, page: newPage + 1, pageCount: newRowsPerPage }
+          : { ...pack, page: newPage + 1, pageCount: newRowsPerPage }
+      )
+    );
+  };
+
   useEffect(() => {
     const payload: PayloadTypeForUpdate = {
       cardsPack: { name: "MYPACK" },
@@ -61,7 +71,6 @@ export const Packs = () => {
   useEffect(() => {
     //dispatch(packsThunks.getPacks({ pageCount: 8 }));
     sessionStorage.setItem("cardsPATH", "/packs");
-
     // sessionStorage.setItem("cardsPack_id", "goToPacks");
     dispatch(packsThunks.getPacks(loadState() ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 }));
   }, []);
@@ -82,7 +91,13 @@ export const Packs = () => {
       />
       <Spreadsheet headers={headers} />
       <S.PaginationStyle>
-        <Pagination rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} payload={pack} payloadKey={"packs"} />
+        <Pagination
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
+          //payload={pack}
+          payloadKey={"packs"}
+          dispatchFoo={dispatchFoo}
+        />
       </S.PaginationStyle>
     </div>
   );
