@@ -23,7 +23,7 @@ export type PayloadTypeForUpdate = {
 export const Packs = () => {
   const dispatch = useAppDispatch();
   const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
-  const [valueRange, setValueRange] = React.useState<number[]>([0, 10]); //RANGE
+  const [valueRange, setValueRange] = React.useState<number[]>([0, 100]); //RANGE
   const [titleSearch, setTitleSearch] = useState<string | null>(null); //SEARCH
   const [rowsPerPage, setRowsPerPage] = React.useState(10); //PAGINATOR
   const [disabled, setDisabled] = useState(false);
