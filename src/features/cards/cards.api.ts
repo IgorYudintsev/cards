@@ -29,7 +29,7 @@ export const cardsApi = {
 
 export type CardsPayload = {
   cardAnswer?: string;
-  cardQuestion?: string;
+  cardQuestion?: string | null;
   cardsPack_id: string;
   min?: number;
   max?: number;
