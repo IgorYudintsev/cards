@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import React from "react";
+import { useAppDispatch } from "app/hooks";
 import { authThunks } from "features/auth/auth.slice";
 import { FormComponent } from "reusableForms/FormComponent";
 import { LoginForm } from "reusableForms/LoginForm";
@@ -10,13 +10,7 @@ import { toast } from "react-toastify";
 export const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const logined = useAppSelector((state) => state.auth.profile);
-  const cardsPack_id = sessionStorage.getItem("cardsPack_id");
 
-  //logined ? navigate("/packs") : dispatch(authThunks.authMe());
-  // if (logined) {
-  //   navigate("/packs");
-  // }
   const queryLogin = (payload: ArgLoginType) => {
     dispatch(authThunks.login(payload))
       .unwrap() //благодаря unwrap() -мы отрабатываем положительные или отрицательные кейсы
@@ -25,7 +19,7 @@ export const SignIn = () => {
         navigate("/packs");
       })
       .catch((err) => {
-        toast.error("Залогиниться не удалось");
+        //toast.error("Залогиниться не удалось");
       });
   };
   return (

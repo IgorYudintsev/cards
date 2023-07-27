@@ -1,14 +1,14 @@
 import React from "react";
 import { ForgotForm } from "reusableForms/ForgotForm";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import { ForgetPasswordType } from "features/auth/auth.api";
 import { authThunks } from "features/auth/auth.slice";
+import { toast } from "react-toastify";
 
 export const ForgotPassword = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // const emailSended = useAppSelector((state) => state.auth.emailSended);
 
   const queryForgot = (payload: ForgetPasswordType) => {
     dispatch(authThunks.forgetpassword(payload))
@@ -24,8 +24,5 @@ export const ForgotPassword = () => {
       });
   };
 
-  // if (emailSended) {
-  //   navigate("/check-email");
-  // }
   return <ForgotForm title={"Forgot your password?"} callBack={queryForgot} />;
 };

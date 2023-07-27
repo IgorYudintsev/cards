@@ -27,7 +27,7 @@ export const SetNewPassword = () => {
 
   return (
     <FormComponent>
-      <SetnewPassForm title={"Create new password"} callBack={querySetNewPas} forgot={false} />
+      <SetnewPassForm title={"Create new password"} callBack={querySetNewPas} />
     </FormComponent>
   );
 };

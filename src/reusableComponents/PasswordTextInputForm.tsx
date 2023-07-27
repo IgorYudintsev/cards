@@ -12,15 +12,13 @@ import Visibility from "@mui/icons-material/Visibility";
 type PasswordTextInputProps = {
   name: string;
   control: Control<any>;
-  label: string;
   rules?: Record<string, unknown>;
   errors: FieldError | undefined;
   passwordsRequire?: boolean;
-  onePasField?: boolean;
 };
 
 export const PasswordTextInputForm: React.FC<PasswordTextInputProps> = (props) => {
-  const { name, control, label, rules, errors, passwordsRequire = true, onePasField } = props;
+  const { name, control, rules, errors, passwordsRequire = true } = props;
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {

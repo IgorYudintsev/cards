@@ -11,6 +11,7 @@ import { RangeSlider } from "reusableComponents/RangeSlider";
 import IconButton from "@mui/material/IconButton";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
 import { CardsPayload } from "features/cards/cards.api";
+import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 
 type PropsType = {
   titleSearch: string | null;
@@ -18,7 +19,6 @@ type PropsType = {
   valueRange: number[];
   setValueRange: (valueRange: number[]) => void;
   setRowsPerPage: (rowsPerPage: number) => void;
-  // payload: GetPacksPayload | CardsPayload;
   payloadCards?: CardsPayload;
   payloadPacks?: GetPacksPayload;
   payloadKey: "packs" | "cards";
@@ -36,7 +36,7 @@ export const SearchFilter: React.FC<PropsType> = (props) => {
     payloadKey,
   } = props;
   const dispatch = useAppDispatch();
-  const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
+  const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
   const [on, setOn] = useState("");
   const [variant, setVariant] = useState(false);
   const debouncedValue = useDebounce<string>(on, 1000);

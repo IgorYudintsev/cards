@@ -1,6 +1,5 @@
 import React from "react";
 import TableCell from "@mui/material/TableCell";
-import { CardPacks } from "features/packs/packs.api";
 import { HeadersType } from "components/Packs/Packs";
 
 type PropsType = {

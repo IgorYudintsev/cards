@@ -1,14 +1,12 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { packsThunks } from "features/packs/packs.slice";
-
-import { useEffect } from "react";
 import { GetPacksPayload } from "features/packs/packs.api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { localHelper } from "utils/localStorage";
-import { CardsPayload } from "features/cards/cards.api";
-import { cardsThunks } from "features/cards/cards.slice";
+import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 
 function valuetext(value: number) {
   return `${value}°C`;
@@ -22,7 +20,7 @@ type PropsType = {
 
 export const RangeSlider: React.FC<PropsType> = ({ setValue, value, payloadPacks }) => {
   const dispatch = useAppDispatch();
-  const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
+  const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);

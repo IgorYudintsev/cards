@@ -1,8 +1,8 @@
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import { ButtonComponentForm } from "reusableComponents/ButtonComponentForm";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Paper } from "@mui/material";
-import { ArgLoginType, ArgRegisterType } from "features/auth/auth.api";
+import { ArgRegisterType } from "features/auth/auth.api";
 import { S } from "./Form_styles";
 import { TextInputForm } from "reusableComponents/TextInputForm";
 import { PasswordTextInputForm } from "reusableComponents/PasswordTextInputForm";
@@ -60,7 +60,6 @@ export const RegisterForm: React.FC<PropsType> = (props) => {
 
             <PasswordTextInputForm
               name={"password"}
-              label={"Password"}
               rules={{ required: "Password is required" }}
               control={control}
               errors={errors.password}
@@ -69,7 +68,6 @@ export const RegisterForm: React.FC<PropsType> = (props) => {
 
             <PasswordTextInputForm
               name={"password2"}
-              label={"Password"}
               rules={{ required: "Password is required" }}
               control={control}
               errors={errors.password2}

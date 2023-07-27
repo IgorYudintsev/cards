@@ -8,7 +8,6 @@ import { PasswordTextInputForm } from "reusableComponents/PasswordTextInputForm"
 type PropsType = {
   title: string;
   callBack: (password: string) => void;
-  forgot: boolean;
 };
 
 export type Inputs = {
@@ -16,11 +15,10 @@ export type Inputs = {
 };
 
 export const SetnewPassForm: React.FC<PropsType> = (props) => {
-  const { title, callBack, forgot } = props;
+  const { title, callBack } = props;
 
   const {
     control,
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
@@ -38,11 +36,9 @@ export const SetnewPassForm: React.FC<PropsType> = (props) => {
 
             <PasswordTextInputForm
               name={"password"}
-              label={"Password"}
               rules={{ required: "Password is required" }}
               control={control}
               errors={errors.password}
-              onePasField={true}
             />
             <S.OpacitySpan>Create new password and we will send you further instructions to email</S.OpacitySpan>
 

@@ -1,17 +1,17 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { packsThunks } from "features/packs/packs.slice";
-import { GetPacksPayload } from "../features/packs/packs.api";
+import { GetPacksPayload } from "features/packs/packs.api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useDebounce } from "utils/useDebounce";
-import { loadState, localHelper } from "utils/localStorage";
+import { localHelper } from "utils/localStorage";
 import { CardsPayload } from "features/cards/cards.api";
 import { cardsThunks } from "features/cards/cards.slice";
+import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 
 type PropsType = {
   titleSearch: string | null;
   setTitleSearch: (titleSearch: string | null) => void;
-  // payload: CardsPayload | GetPacksPayload;
   payloadCards?: CardsPayload;
   payloadPacks?: GetPacksPayload;
   payloadKey: "packs" | "cards";
@@ -25,13 +25,9 @@ export const InputWithoutForm: React.FC<PropsType> = ({
   // payload,
   payloadKey,
 }) => {
-  const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
+  const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
   const debouncedValue = useDebounce<string | null>(titleSearch, 500);
   const dispatch = useAppDispatch();
-
-  // export const localHelper = (userID: string, params: Object) => {
-  //   return loadState() ? { ...params, user_id: userID } : params;
-  // };
 
   useEffect(() => {
     if (titleSearch !== null) {
@@ -43,18 +39,6 @@ export const InputWithoutForm: React.FC<PropsType> = ({
       }
     }
   }, [debouncedValue]);
-
-  // useEffect(() => {
-  //   if (titleSearch !== null) {
-  //     if(payloadPacks){
-  //       dispatch(packsThunks.getPacks(localHelper(userIDfromProfile, payloadPacks)));
-  //     }
-  //     if(payloadCards){
-  //       dispatch(cardsThunks.getCards(payloadCards));
-  //
-  //     }
-  //   }
-  // }, [debouncedValue]);
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setTitleSearch(e.currentTarget.value);

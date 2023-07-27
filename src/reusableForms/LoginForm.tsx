@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React from "react";
 import { ArgLoginType } from "features/auth/auth.api";
 import { Paper } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -7,7 +7,6 @@ import { TextInputForm } from "reusableComponents/TextInputForm";
 import { PasswordTextInputForm } from "reusableComponents/PasswordTextInputForm";
 import { Link } from "react-router-dom";
 import { CheckBox } from "reusableComponents/CheckBox";
-import { ButtonComponent } from "reusableComponents/ButtonComponent";
 import { ButtonComponentForm } from "reusableComponents/ButtonComponentForm";
 
 type LoginFormProps = {
@@ -57,7 +56,6 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
 
             <PasswordTextInputForm
               name={"password"}
-              label={"Password"}
               rules={{ required: "Password is required" }}
               control={control}
               errors={errors.password}

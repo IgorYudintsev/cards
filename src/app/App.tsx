@@ -7,13 +7,18 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import LinearProgressVariants from "utils/LinearProgressVariants";
 import { GlobalError } from "reusableComponents/GlobalError";
 import { authThunks } from "features/auth/auth.slice";
+import { isLoadingSelector } from "app/app.selectors";
+import { loginedSelector } from "features/auth/auth.selectors";
 
 function App() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const isLoading = useAppSelector((state) => state.app.isLoading);
-  const logined = useAppSelector((state) => state.auth.profile);
-  const currentPath = sessionStorage.getItem("cardsPATH"); //из sessionStorage получаем путь где мы до этого были, чтобы вернуться сюда же при перезагрузке страницы
+  // const isLoading = useAppSelector((state) => state.app.isLoading);
+  const isLoading = useAppSelector(isLoadingSelector);
+  const logined = useAppSelector(loginedSelector);
+
+  const currentPath = sessionStorage.getItem("cardsPATH");
+  //из sessionStorage получаем путь где мы до этого были, чтобы вернуться сюда же при перезагрузке страницы
 
   useEffect(() => {
     if (!logined) {

@@ -2,6 +2,7 @@ import React from "react";
 import { Control, Controller } from "react-hook-form";
 import Button from "@mui/material/Button";
 import { useAppSelector } from "app/hooks";
+import { isLoadingSelector } from "app/app.selectors";
 
 type ButtonProps = {
   variant: string;
@@ -10,7 +11,7 @@ type ButtonProps = {
 };
 
 export const ButtonComponentForm: React.FC<ButtonProps> = ({ control, variant, buttonName }) => {
-  const isDesabled = useAppSelector((state) => state.app.isLoading);
+  const isDesabled = useAppSelector(isLoadingSelector);
   return (
     <Controller
       name={variant}

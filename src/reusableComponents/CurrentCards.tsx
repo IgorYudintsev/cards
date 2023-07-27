@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import IconButton from "@mui/material/IconButton";
 import SchoolIcon from "@mui/icons-material/School";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { packsThunks } from "features/packs/packs.slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { useNavigate } from "react-router-dom";
-import { CardPacks } from "features/packs/packs.api";
-import { AddCardType, CardType } from "features/cards/cards.api";
+import { CardType } from "features/cards/cards.api";
 import { cutter } from "utils/cutter";
-import { authThunks } from "features/auth/auth.slice";
 import { cardsThunks } from "features/cards/cards.slice";
+import { isLoadingSelector } from "app/app.selectors";
+import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 
 type PropsType = {
   items: CardType[];
@@ -20,9 +18,8 @@ type PropsType = {
 
 export const CurrentCards = ({ items }: PropsType) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
-  const isLoading = useAppSelector((state) => state.app.isLoading);
+  const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
+  const isLoading = useAppSelector(isLoadingSelector);
 
   const deleteHandler = (cardId: string | undefined, cardsPack_id: string | undefined) => {
     if (cardId && cardsPack_id) {
@@ -40,10 +37,6 @@ export const CurrentCards = ({ items }: PropsType) => {
       dispatch(cardsThunks.updateCard(payload));
     }
   };
-
-  // const navigateHandler = (rowID: ) => {
-  //   navigate(`/cards/${rowID}`);
-  // };
 
   return (
     <>

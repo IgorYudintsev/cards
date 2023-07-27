@@ -11,14 +11,16 @@ import { TableHeader } from "reusableComponents/TableHeader";
 import { useAppSelector } from "app/hooks";
 import { CurrentCards } from "reusableComponents/CurrentCards";
 import { useLocation } from "react-router-dom";
+import { packsSelector } from "features/packs/packs.selectors";
+import { cardsSelector } from "features/cards/cards.selector";
 
 type PropsType = {
   headers: HeadersType[];
 };
 export const Spreadsheet: React.FC<PropsType> = (props) => {
   const { headers } = props;
-  const cards = useAppSelector((state) => state.cards.cards);
-  const packs = useAppSelector((state) => state.packs.cardPacks);
+  const cards = useAppSelector(cardsSelector);
+  const packs = useAppSelector(packsSelector);
   const location = useLocation();
   const locationName = location.pathname.split("/")[1] === "packs" ? packs : cards;
 

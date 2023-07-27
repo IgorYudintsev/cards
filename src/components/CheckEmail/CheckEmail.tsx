@@ -6,10 +6,11 @@ import Paper from "@mui/material/Paper";
 import { useNavigate } from "react-router-dom";
 import { ButtonComponent } from "reusableComponents/ButtonComponent";
 import { useAppSelector } from "app/hooks";
+import { emailSelector } from "features/auth/auth.selectors";
 
 export const CheckEmail = () => {
   const navigate = useNavigate();
-  const email = useAppSelector((state) => state.auth.email);
+  const email = useAppSelector(emailSelector);
 
   const backToLogin = () => {
     navigate("/sign-in");

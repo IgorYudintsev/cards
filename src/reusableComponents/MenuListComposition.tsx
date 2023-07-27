@@ -11,10 +11,11 @@ import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { authThunks } from "features/auth/auth.slice";
+import { loginedSelector } from "features/auth/auth.selectors";
 
 export default function MenuListComposition() {
   const dispatch = useAppDispatch();
-  const logined = useAppSelector((state) => state.auth.profile);
+  const logined = useAppSelector(loginedSelector);
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);

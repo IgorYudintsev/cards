@@ -42,10 +42,11 @@ const slice = createSlice({
         (action) => action.type.endsWith("/rejected"),
         (state, action) => {
           // console.log(action.type);
-          if (action.type == "auth/me/rejected") {
+          if (action.type === "auth/me/rejected") {
             state.error = null;
           }
-          if (action.type != "auth/me/rejected") {
+
+          if (action.type !== "auth/me/rejected") {
             const err = action.payload as Error | AxiosError<{ error: string }>;
             if (isAxiosError(err)) {
               state.error = err.response ? err.response.data.error : err.message;

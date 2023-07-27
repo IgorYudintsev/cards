@@ -3,9 +3,10 @@ import { useEffect } from "react";
 import { appActions } from "app/app.slice";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppDispatch, useAppSelector } from "app/hooks";
+import { errorSelector } from "app/app.selectors";
 
 export const GlobalError = () => {
-  const error = useAppSelector((state) => state.app.error);
+  const error = useAppSelector(errorSelector);
   const dispatch = useAppDispatch();
 
   if (error !== null) {

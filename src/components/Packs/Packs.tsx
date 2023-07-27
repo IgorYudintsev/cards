@@ -10,6 +10,7 @@ import { Spreadsheet } from "reusableComponents/Spreadsheet";
 import { SearchFilter } from "reusableComponents/SearchFilter";
 import { Pagination } from "reusableComponents/Pagination";
 import { S } from "features/cardsPacksStyles/CardsPacks_styles";
+import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 
 export type HeadersType = {
   name: string;
@@ -22,12 +23,13 @@ export type PayloadTypeForUpdate = {
 
 export const Packs = () => {
   const dispatch = useAppDispatch();
-  const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
+  const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
   const [valueRange, setValueRange] = React.useState<number[]>([0, 100]); //RANGE
   const [titleSearch, setTitleSearch] = useState<string | null>(null); //SEARCH
   const [rowsPerPage, setRowsPerPage] = React.useState(10); //PAGINATOR
   const [disabled, setDisabled] = useState(false);
   const debouncedValue = useDebounce<boolean>(disabled, 500);
+  let [conditionForPage0, setConditionForPage0] = useState(true);
 
   const pack: GetPacksPayload = {
     min: valueRange[0],
@@ -73,6 +75,7 @@ export const Packs = () => {
     sessionStorage.setItem("cardsPATH", "/packs");
     // sessionStorage.setItem("cardsPack_id", "goToPacks");
     dispatch(packsThunks.getPacks(loadState() ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 }));
+    setConditionForPage0(false);
   }, []);
 
   const payloadKey = "packs";
@@ -100,6 +103,7 @@ export const Packs = () => {
           setRowsPerPage={setRowsPerPage}
           payloadKey={payloadKey}
           dispatchFoo={dispatchFoo}
+          conditionForPage0={conditionForPage0}
         />
       </S.PaginationStyle>
     </div>
