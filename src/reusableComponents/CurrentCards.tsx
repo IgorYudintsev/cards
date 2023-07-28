@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { CardType } from "features/cards/cards.api";
-import { cutter } from "utils/cutter";
+import { cutter } from "utils";
 import { cardsThunks } from "features/cards/cards.slice";
 import { isLoadingSelector } from "app/app.selectors";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";

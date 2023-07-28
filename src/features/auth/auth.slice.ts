@@ -9,8 +9,6 @@ import {
   UpdateProfileType,
 } from "features/auth/auth.api";
 import { createAppAsyncThunk, thunkTryCatch } from "utils";
-//import { createAppAsyncThunk } from "common/utils/createAppAsyncThunk";
-//import { createAppAsyncThunk, thunkTryCatch } from "common/utils";
 
 const slice = createSlice({
   name: "auth",

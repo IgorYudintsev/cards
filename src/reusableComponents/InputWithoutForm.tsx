@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { packsThunks } from "features/packs/packs.slice";
 import { GetPacksPayload } from "features/packs/packs.api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { useDebounce } from "utils/useDebounce";
+import { useDebounce } from "utils";
 import { localHelper } from "utils/localStorage";
 import { CardsPayload } from "features/cards/cards.api";
 import { cardsThunks } from "features/cards/cards.slice";

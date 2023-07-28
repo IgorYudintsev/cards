@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useEffect } from "react";
 import TablePagination from "@mui/material/TablePagination";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { useDebounce } from "utils/useDebounce";
+import { useAppSelector } from "app/hooks";
+import { useDebounce } from "utils";
 
 type PropsType = {
   rowsPerPage: number;

@@ -26,15 +26,3 @@ export const thunkTryCatch = async (thunkAPI: BaseThunkAPI<RootState, any, AppDi
     // dispatch(appActions.setIsLoading({ isLoading: false }));
   }
 };
-
-//---------------------------------------------------------------------------------------------------------------------
-// export const thunkTryCatch = async (thunkAPI: BaseThunkAPI<RootState, any, AppDispatch, null>, logic: Function) => {
-//   const { dispatch, rejectWithValue } = thunkAPI;
-//   try {
-//     return await logic();
-//   } catch (e: any) {
-//     const error = e.response ? e.response.data.error : e.message;
-//     dispatch(appActions.setError({ error }));
-//     return rejectWithValue(null);
-//   }
-// };

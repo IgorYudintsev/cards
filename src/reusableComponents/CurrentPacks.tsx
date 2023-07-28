@@ -9,7 +9,7 @@ import { packsThunks } from "features/packs/packs.slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import { CardPacks } from "features/packs/packs.api";
-import { cutter } from "utils/cutter";
+import { cutter } from "utils";
 
 type PropsType = {
   items: CardPacks[];

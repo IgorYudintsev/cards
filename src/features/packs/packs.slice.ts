@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AddPack, CardPacks, GetPacks, GetPacksPayload, packsApi, UpdatePack } from "features/packs/packs.api";
 import { createAppAsyncThunk, thunkTryCatch } from "utils";
-import { loadState } from "utils/localStorage";
+import { loadState } from "utils";
 
 export const packsInitialState: GetPacks = {
   cardPacks: [] as CardPacks[],

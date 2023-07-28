@@ -1,6 +1,6 @@
 import React from "react";
-import { RegisterForm } from "reusableForms/RegisterForm";
-import { FormComponent } from "reusableForms/FormComponent";
+import { RegisterForm } from "reusableForms";
+import { FormComponent } from "reusableForms";
 import { ArgRegisterType } from "features/auth/auth.api";
 import { authThunks } from "features/auth/auth.slice";
 import { useNavigate } from "react-router-dom";

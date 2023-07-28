@@ -1,5 +1,5 @@
 import React from "react";
-import { ForgotForm } from "reusableForms/ForgotForm";
+import { ForgotForm } from "reusableForms";
 import { useAppDispatch } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import { ForgetPasswordType } from "features/auth/auth.api";

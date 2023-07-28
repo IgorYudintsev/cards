@@ -1,8 +1,8 @@
 import React from "react";
 import { useAppDispatch } from "app/hooks";
 import { authThunks } from "features/auth/auth.slice";
-import { FormComponent } from "reusableForms/FormComponent";
-import { LoginForm } from "reusableForms/LoginForm";
+import { FormComponent } from "reusableForms";
+import { LoginForm } from "reusableForms";
 import { useNavigate } from "react-router-dom";
 import { ArgLoginType } from "features/auth/auth.api";
 import { toast } from "react-toastify";

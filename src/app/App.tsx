@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "app/App.css";
 import { Header } from "features/appBar/Header/Header";
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 
-import LinearProgressVariants from "utils/LinearProgressVariants";
+import { LinearProgressVariants } from "utils";
 import { GlobalError } from "reusableComponents/GlobalError";
 import { authThunks } from "features/auth/auth.slice";
 import { isLoadingSelector } from "app/app.selectors";
