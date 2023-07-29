@@ -9,6 +9,8 @@ import { SearchFilter } from "reusableComponents/SearchFilter";
 import { Pagination } from "reusableComponents/Pagination";
 import { S } from "features/cardsPacksStyles/CardsPacks_styles";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
+import { BasicModal } from "reusableModal/BasicModal";
+import { AddModal } from "reusableModal";
 
 export type HeadersType = {
   name: string;
@@ -29,6 +31,8 @@ export const Packs = () => {
   const debouncedValue = useDebounce<boolean>(disabled, 500);
   let [conditionForPage0, setConditionForPage0] = useState(true);
 
+  const [open, setOpen] = React.useState(false); //MODAL
+
   const pack: GetPacksPayload = {
     min: valueRange[0],
     max: valueRange[1],
@@ -45,6 +49,7 @@ export const Packs = () => {
   ];
 
   const addPackHandler = () => {
+    setOpen(true);
     setDisabled(true);
   };
 
@@ -80,6 +85,7 @@ export const Packs = () => {
 
   return (
     <div>
+      <AddModal open={open} setOpen={setOpen} />
       <S.HeaderBlock>
         <h1 style={{ marginTop: "-10px" }}>Packs list</h1>
         <ButtonComponent buttonName={"Add new pack"} callback={addPackHandler} disabled={false} />
@@ -90,7 +96,6 @@ export const Packs = () => {
         titleSearch={titleSearch}
         setTitleSearch={setTitleSearch}
         setRowsPerPage={setRowsPerPage}
-        // payload={pack}
         payloadPacks={pack}
         payloadKey={payloadKey}
       />

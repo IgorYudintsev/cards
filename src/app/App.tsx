@@ -3,17 +3,16 @@ import "app/App.css";
 import { Header } from "features/appBar/Header/Header";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-
 import { LinearProgressVariants } from "utils";
 import { GlobalError } from "reusableComponents/GlobalError";
 import { authThunks } from "features/auth/auth.slice";
 import { isLoadingSelector } from "app/app.selectors";
 import { loginedSelector } from "features/auth/auth.selectors";
+import { BasicModal } from "reusableModal/BasicModal";
 
 function App() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // const isLoading = useAppSelector((state) => state.app.isLoading);
   const isLoading = useAppSelector(isLoadingSelector);
   const logined = useAppSelector(loginedSelector);
 
