@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import incubaIcon from "assets/icon/incubaIcon.jpg";
 import styled from "styled-components";
-import { ButtonComponent } from "reusableComponents/ButtonComponent";
+import { ButtonComponent } from "reusableComponents";
 import { Avatar } from "@mui/material";
 import { useAppSelector } from "app/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
-
 import ava from "assets/icon/ava.jpg";
-import MenuListComposition from "reusableComponents/MenuListComposition";
+import { MenuListComposition } from "reusableComponents";
 import { loginedSelector } from "features/auth/auth.selectors";
 
 type PropsType = {

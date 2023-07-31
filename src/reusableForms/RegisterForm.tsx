@@ -56,6 +56,7 @@ export const RegisterForm: React.FC<PropsType> = (props) => {
               rules={{ required: "Email is required" }}
               control={control}
               errors={errors.email}
+              defaultValue={"developeryudintsev@gmail.com"}
             />
 
             <PasswordTextInputForm

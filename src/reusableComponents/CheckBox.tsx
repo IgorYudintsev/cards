@@ -6,9 +6,10 @@ import styled from "styled-components";
 type CheckBoxProps = {
   name: string;
   control: Control<any>;
+  title: string;
 };
 
-export const CheckBox: React.FC<CheckBoxProps> = ({ name, control }) => {
+export const CheckBox: React.FC<CheckBoxProps> = ({ name, control, title }) => {
   return (
     <Controller
       name={name}
@@ -19,7 +20,7 @@ export const CheckBox: React.FC<CheckBoxProps> = ({ name, control }) => {
           <>
             <WrapperCheckBox>
               <Checkbox {...field} />
-              <span style={{ marginTop: "10px" }}>Remember me</span>
+              <span style={{ marginTop: "10px" }}>{title}</span>
             </WrapperCheckBox>
           </>
         );

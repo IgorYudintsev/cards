@@ -8,16 +8,19 @@ type TextInputProps = {
   label: string;
   rules?: Record<string, unknown>;
   errors: FieldError | undefined;
+  defaultValue: string;
 };
 
-export const TextInputForm: React.FC<TextInputProps> = ({ name, control, label, rules, errors }) => {
+export const TextInputForm: React.FC<TextInputProps> = (props) => {
+  const { name, control, label, rules, errors, defaultValue } = props;
   const currentError = errors?.type === "required" ? "This field is required" : "Please enter a valid email address.";
+
   return (
     <Controller
       name={name}
       control={control}
       rules={rules}
-      defaultValue="developeryudintsev@gmail.com"
+      defaultValue={defaultValue}
       render={({ field, fieldState }) => (
         <>
           <TextField
@@ -27,6 +30,7 @@ export const TextInputForm: React.FC<TextInputProps> = ({ name, control, label, 
             error={Boolean(fieldState.error)}
             variant="filled"
             defaultValue={field.value}
+            fullWidth={true}
           />
           {errors && <span style={{ color: "red" }}>{currentError}</span>}
         </>

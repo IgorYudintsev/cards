@@ -43,7 +43,7 @@ export type UpdatePack = {
 export type AddPack = {
   name: string;
   deckCover?: "url or base64"; // не обязателен
-  private?: false; // если не отправить будет такой
+  private?: boolean; // если не отправить будет такой
 };
 
 export type GetPacks = {

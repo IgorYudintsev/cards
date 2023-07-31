@@ -52,6 +52,7 @@ export const ForgotForm: React.FC<PropsType> = (props) => {
               rules={{ required: "Email is required", pattern: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/i }}
               control={control}
               errors={errors.email}
+              defaultValue={"developeryudintsev@gmail.com"}
             />
             {/*{errors.email && <p>Введите корректный email адрес.</p>}*/}
             <S.OpacitySpan>Enter your email address and we will send you further instructions </S.OpacitySpan>

@@ -30,6 +30,7 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
     const payload = {
       email: data.email, //dollarselephant@gmail.com
       password: data.password, //12345678
@@ -52,6 +53,7 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
               rules={{ required: "Email is required" }}
               control={control}
               errors={errors.email}
+              defaultValue={"developeryudintsev@gmail.com"}
             />
 
             <PasswordTextInputForm
@@ -61,7 +63,7 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
               errors={errors.password}
             />
 
-            <CheckBox name={"rememberMe"} control={control} />
+            <CheckBox name={"rememberMe"} control={control} title={"Remember me"} />
 
             <S.WrapperForgetPassword>
               <Link to={"/forgot-password"}>Forgot password?</Link>

@@ -4,6 +4,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { PropsWithChildren } from "react";
+import styled from "styled-components";
+import xIcon from "assets/icon/x.png";
+import { S } from "reusableForms/Form_styles";
 
 const style = {
   position: "absolute" as "absolute",
@@ -12,7 +15,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  // border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -20,9 +23,10 @@ const style = {
 type PropsType = {
   open: boolean;
   setOpen: (open: boolean) => void;
+  title: string;
 };
 
-export const BasicModal: React.FC<PropsWithChildren & PropsType> = ({ children, open, setOpen }) => {
+export const BasicModal: React.FC<PropsWithChildren & PropsType> = ({ children, open, setOpen, title }) => {
   //const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -37,15 +41,29 @@ export const BasicModal: React.FC<PropsWithChildren & PropsType> = ({ children, 
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {children}
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <TitleWrapper>
+            <h2 style={{ fontFamily: "Montserrat" }}>{title}</h2>
+            <Icon>
+              <img src={xIcon} alt="xIcon" onClick={handleClose} />
+            </Icon>
+          </TitleWrapper>
+          <hr />
+
+          <div style={{ marginLeft: "-15px" }}>{children}</div>
         </Box>
       </Modal>
     </div>
   );
 };
+
+const Icon = styled.span`
+  & > img {
+    margin-top: 26px;
+    cursor: pointer;
+  }
+`;
+const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: -25px;
+`;

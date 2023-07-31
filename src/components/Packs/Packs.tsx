@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import { packsThunks } from "features/packs/packs.slice";
 import { AddPack, GetPacksPayload } from "features/packs/packs.api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { ButtonComponent } from "reusableComponents/ButtonComponent";
+import { ButtonComponent } from "reusableComponents";
 import { loadState, useDebounce } from "utils";
-import { Spreadsheet } from "reusableComponents/Spreadsheet";
-import { SearchFilter } from "reusableComponents/SearchFilter";
-import { Pagination } from "reusableComponents/Pagination";
+import { Spreadsheet } from "reusableComponents";
+import { SearchFilter } from "reusableComponents";
+import { Pagination } from "reusableComponents";
 import { S } from "features/cardsPacksStyles/CardsPacks_styles";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
-import { BasicModal } from "reusableModal/BasicModal";
 import { AddModal } from "reusableModal";
 
 export type HeadersType = {
@@ -50,7 +49,6 @@ export const Packs = () => {
 
   const addPackHandler = () => {
     setOpen(true);
-    setDisabled(true);
   };
 
   const dispatchFoo = (newPage: number, newRowsPerPage: number) => {
@@ -62,16 +60,6 @@ export const Packs = () => {
       )
     );
   };
-
-  useEffect(() => {
-    const payload: PayloadTypeForUpdate = {
-      cardsPack: { name: "MYPACK" },
-    };
-    if (debouncedValue) {
-      dispatch(packsThunks.addPack({ userIDfromProfile: userIDfromProfile, payload }));
-      setDisabled(false);
-    }
-  }, [debouncedValue]);
 
   useEffect(() => {
     //dispatch(packsThunks.getPacks({ pageCount: 8 }));

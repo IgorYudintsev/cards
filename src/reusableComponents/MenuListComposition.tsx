@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { authThunks } from "features/auth/auth.slice";
 import { loginedSelector } from "features/auth/auth.selectors";
 
-export default function MenuListComposition() {
+export const MenuListComposition = () => {
   const dispatch = useAppDispatch();
   const logined = useAppSelector(loginedSelector);
   const navigate = useNavigate();
@@ -103,4 +103,4 @@ export default function MenuListComposition() {
       </div>
     </Stack>
   );
-}
+};

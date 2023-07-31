@@ -14,7 +14,7 @@ export const ButtonComponentForm: React.FC<ButtonProps> = ({ control, variant, b
   const isDesabled = useAppSelector(isLoadingSelector);
   return (
     <Controller
-      name={variant}
+      name={buttonName}
       control={control}
       render={({ field, fieldState }) => (
         <>
