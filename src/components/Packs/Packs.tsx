@@ -9,7 +9,7 @@ import { SearchFilter } from "reusableComponents";
 import { Pagination } from "reusableComponents";
 import { S } from "features/cardsPacksStyles/CardsPacks_styles";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
-import { AddModal } from "reusableModal";
+import { AddEditModal } from "reusableModal";
 
 export type HeadersType = {
   name: string;
@@ -73,7 +73,7 @@ export const Packs = () => {
 
   return (
     <div>
-      <AddModal open={open} setOpen={setOpen} />
+      <AddEditModal open={open} setOpen={setOpen} name={"Add new Pack"} modalKey={"addPack"} title={"Add new pack"} />
       <S.HeaderBlock>
         <h1 style={{ marginTop: "-10px" }}>Packs list</h1>
         <ButtonComponent buttonName={"Add new pack"} callback={addPackHandler} disabled={false} />

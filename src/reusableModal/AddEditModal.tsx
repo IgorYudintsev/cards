@@ -1,16 +1,22 @@
 import React from "react";
 import { BasicModal } from "reusableModal";
-import { ButtonComponent, ButtonComponentForm, CheckBox, TextInputForm } from "reusableComponents";
+import { ButtonComponent, ButtonComponentForm, CheckBox } from "reusableComponents";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 import { PayloadTypeForUpdate } from "components/Packs/Packs";
 import { packsThunks } from "features/packs/packs.slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
+import { TextInputFormForModal } from "reusableComponents/TextInputFormForModal";
 
 type PropsType = {
   open: boolean;
   setOpen: (open: boolean) => void;
+  name: string;
+  modalData?: { id: string; name: string };
+  setModalData?: (data: { id: string; name: string }) => void;
+  modalKey: "updatePack" | "addPack";
+  title: string;
 };
 
 export type Inputs = {
@@ -18,46 +24,62 @@ export type Inputs = {
   rememberMe: boolean;
 };
 
-export const AddModal: React.FC<PropsType> = ({ open, setOpen }) => {
+export const AddEditModal: React.FC<PropsType> = (props) => {
+  const { open, setOpen, name, modalData, modalKey, title } = props;
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
   const dispatch = useAppDispatch();
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const payload: PayloadTypeForUpdate = {
-      cardsPack: {
-        name: data.email,
-        private: data.rememberMe,
-      },
-    };
+    if (modalKey === "addPack") {
+      const payload: PayloadTypeForUpdate = {
+        cardsPack: {
+          name: data.email,
+          private: data.rememberMe,
+        },
+      };
+      dispatch(packsThunks.addPack({ userIDfromProfile: userIDfromProfile, payload }));
+    } else {
+      const payload = {
+        cardsPack: {
+          _id: modalData!.id,
+          name: data.email,
+          private: data.rememberMe,
+        },
+      };
+      dispatch(packsThunks.updatePack({ payload, userID: userIDfromProfile }));
+    }
+    setOpen(false);
+  };
 
-    dispatch(packsThunks.addPack({ userIDfromProfile: userIDfromProfile, payload }));
+  const setOpenHandler = () => {
     setOpen(false);
   };
 
   return (
-    <BasicModal open={open} setOpen={setOpen} title={"Add new pack"}>
+    <BasicModal open={open} setOpen={setOpen} title={title}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormWrapper>
           <InputWrapper>
-            <TextInputForm
+            <TextInputFormForModal
               name="email"
               label="Email"
               rules={{ required: "Email is required" }}
               control={control}
               errors={errors.email}
-              defaultValue={"UPDATED PACK"}
+              defaultValue={name}
             />
           </InputWrapper>
 
           <CheckBox name={"rememberMe"} control={control} title={"Private pack"} />
 
           <TipicalWrapper>
-            <ButtonComponent variant={"outlined"} callback={() => setOpen(false)} buttonName={"cancel"} />
+            <ButtonComponent variant={"outlined"} callback={setOpenHandler} buttonName={"cancel"} />
             <ButtonComponentForm variant={"contained"} control={control} buttonName={"save"} />
           </TipicalWrapper>
         </FormWrapper>

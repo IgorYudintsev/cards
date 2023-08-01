@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Control, Controller, FieldError } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 
@@ -12,27 +12,31 @@ type TextInputProps = {
   defaultKey?: string;
 };
 
-export const TextInputForm: React.FC<TextInputProps> = (props) => {
-  const { name, control, label, rules, errors, defaultValue} = props;
+export const TextInputFormForModal: React.FC<TextInputProps> = (props) => {
+  const { name, control, label, rules, errors, defaultValue } = props;
   const currentError = errors?.type === "required" ? "This field is required" : "Please enter a valid email address.";
+  const [defValue, setDefValue] = useState(defaultValue);
 
   return (
     <Controller
       name={name}
       control={control}
       rules={rules}
-      defaultValue={defaultValue}
       render={({ field, fieldState }) => (
         <>
           <TextField
-            {...field}
+            onChange={(e) => {
+              setDefValue(e.currentTarget.value);
+              field.onChange(e);
+            }}
             sx={{ m: 1 }}
             label={label}
             error={Boolean(fieldState.error)}
             variant="filled"
-            defaultValue={defaultValue}
+            defaultValue={defValue}
             fullWidth={true}
           />
+
           {errors && <span style={{ color: "red" }}>{currentError}</span>}
         </>
       )}
