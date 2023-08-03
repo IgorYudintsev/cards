@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import { CardPacks } from "features/packs/packs.api";
 import { cutter, saveState } from "utils";
-import { AddEditModal } from "reusableModal";
+import { EditModal } from "reusableModal";
 
 type PropsType = {
   items: CardPacks[];
@@ -48,17 +48,17 @@ export const CurrentPacks = ({ items }: PropsType) => {
 
   return (
     <>
-      {modalData.name !== "" && (
-        <AddEditModal
-          open={open}
-          setOpen={setOpen}
-          name={modalData.name}
-          title={"Update pack"}
-          modalData={modalData}
-          setModalData={setModalData}
-          modalKey={"updatePack"}
-        />
-      )}
+      {/*{modalData.name !== "" && (*/}
+      <EditModal
+        open={open}
+        setOpen={setOpen}
+        name={modalData.name}
+        title={"Update pack"}
+        modalData={modalData}
+        setModalData={setModalData}
+        modalKey={"updatePack"}
+      />
+      {/*)}*/}
 
       {items.map((row) => (
         <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>

@@ -10,15 +10,13 @@ type TextInputProps = {
   errors: FieldError | undefined;
   defaultValue: string;
   defaultKey?: string;
-  defValue: string;
-  setDefValue: (defValue: string) => void;
 };
 
 export const TextInputFormForModal: React.FC<TextInputProps> = (props) => {
-  const { name, control, label, rules, errors, defaultValue, defValue, setDefValue } = props;
+  const { name, control, label, rules, errors, defaultValue } = props;
   const currentError = errors?.type === "required" ? "This field is required" : "";
-  // const [defValue, setDefValue] = useState(defaultValue);
-  // console.log(defValue);
+  const [defValue, setDefValue] = useState(defaultValue);
+
   return (
     <Controller
       name={name}
@@ -36,7 +34,7 @@ export const TextInputFormForModal: React.FC<TextInputProps> = (props) => {
             label={label}
             error={Boolean(fieldState.error)}
             variant="filled"
-            defaultValue={defValue}
+            defaultValue={defaultValue}
             fullWidth={true}
           />
           {errors && <span style={{ color: "red" }}>{currentError}</span>}

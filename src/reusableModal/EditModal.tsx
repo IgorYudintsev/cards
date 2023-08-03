@@ -24,7 +24,7 @@ export type Inputs = {
   rememberMe: boolean;
 };
 
-export const AddEditModal: React.FC<PropsType> = (props) => {
+export const EditModal: React.FC<PropsType> = (props) => {
   const { open, setOpen, name, modalData, modalKey, title } = props;
   console.log(modalData);
   const {
@@ -32,8 +32,6 @@ export const AddEditModal: React.FC<PropsType> = (props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-
-  // let currentName = modalKey === "updatePack" ? localStorage.getItem("forModal") : name;
 
   const dispatch = useAppDispatch();
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
@@ -73,12 +71,10 @@ export const AddEditModal: React.FC<PropsType> = (props) => {
             <TextInputFormForModal
               name="pack"
               label="Pack"
-              // rules={{ required: "Pack is required" }}
+              rules={{ required: "Pack is required" }}
               control={control}
               errors={errors.pack}
-              defaultValue={"ddddd"}
-              defValue={defValue}
-              setDefValue={setDefValue}
+              defaultValue={name}
             />
           </InputWrapper>
 

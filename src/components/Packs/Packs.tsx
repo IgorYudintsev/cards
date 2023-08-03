@@ -2,14 +2,11 @@ import React, { useEffect, useState } from "react";
 import { packsThunks } from "features/packs/packs.slice";
 import { AddPack, GetPacksPayload } from "features/packs/packs.api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { ButtonComponent } from "reusableComponents";
+import { ButtonComponent, Pagination, SearchFilter, Spreadsheet } from "reusableComponents";
 import { loadState, useDebounce } from "utils";
-import { Spreadsheet } from "reusableComponents";
-import { SearchFilter } from "reusableComponents";
-import { Pagination } from "reusableComponents";
 import { S } from "features/cardsPacksStyles/CardsPacks_styles";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
-import { AddEditModal } from "reusableModal";
+import { AddModal } from "reusableModal/AddModal";
 
 export type HeadersType = {
   name: string;
@@ -64,7 +61,6 @@ export const Packs = () => {
   useEffect(() => {
     //dispatch(packsThunks.getPacks({ pageCount: 8 }));
     sessionStorage.setItem("cardsPATH", "/packs");
-    // sessionStorage.setItem("cardsPack_id", "goToPacks");
     dispatch(
       packsThunks.getPacks(loadState("myCards") ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 })
     );
@@ -75,7 +71,7 @@ export const Packs = () => {
 
   return (
     <div>
-      <AddEditModal open={open} setOpen={setOpen} name={"Add new Pack"} modalKey={"addPack"} title={"Add new pack"} />
+      <AddModal open={open} setOpen={setOpen} name={"Add new Pack"} title={"Add new pack"} />
       <S.HeaderBlock>
         <h1 style={{ marginTop: "-10px" }}>Packs list</h1>
         <ButtonComponent buttonName={"Add new pack"} callback={addPackHandler} disabled={false} />
