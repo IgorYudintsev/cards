@@ -1,6 +1,6 @@
-export const loadState = () => {
+export const loadState = (key: string) => {
   try {
-    const serializedState = localStorage.getItem("myCards");
+    const serializedState = localStorage.getItem(key);
     if (serializedState === null) {
       return undefined;
     }
@@ -10,10 +10,10 @@ export const loadState = () => {
   }
 };
 
-export const saveState = () => {
+export const saveState = (key: string) => {
   try {
     const serializedState = JSON.stringify(true);
-    localStorage.setItem("myCards", serializedState);
+    localStorage.setItem(key, serializedState);
   } catch {
     // ignore write errors
   }
@@ -29,6 +29,6 @@ userID-берем из const userIDfromProfile = useAppSelector((state) => state
 params-это - { packName: title, pageCount: 8 }
  */
 
-export const localHelper = (userID: string, params: Object) => {
-  return loadState() ? { ...params, user_id: userID } : params;
+export const localHelper = (key: string, userID: string, params: Object) => {
+  return loadState(key) ? { ...params, user_id: userID } : params;
 };

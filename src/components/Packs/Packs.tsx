@@ -54,7 +54,7 @@ export const Packs = () => {
   const dispatchFoo = (newPage: number, newRowsPerPage: number) => {
     dispatch(
       packsThunks.getPacks(
-        loadState()
+        loadState("myCards")
           ? { ...pack, user_id: userIDfromProfile, page: newPage + 1, pageCount: newRowsPerPage }
           : { ...pack, page: newPage + 1, pageCount: newRowsPerPage }
       )
@@ -65,7 +65,9 @@ export const Packs = () => {
     //dispatch(packsThunks.getPacks({ pageCount: 8 }));
     sessionStorage.setItem("cardsPATH", "/packs");
     // sessionStorage.setItem("cardsPack_id", "goToPacks");
-    dispatch(packsThunks.getPacks(loadState() ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 }));
+    dispatch(
+      packsThunks.getPacks(loadState("myCards") ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 })
+    );
     setConditionForPage0(false);
   }, []);
 

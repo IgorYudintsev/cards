@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BasicModal } from "reusableModal";
 import { ButtonComponent, ButtonComponentForm, CheckBox } from "reusableComponents";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -20,26 +20,30 @@ type PropsType = {
 };
 
 export type Inputs = {
-  email: string;
+  pack: string;
   rememberMe: boolean;
 };
 
 export const AddEditModal: React.FC<PropsType> = (props) => {
   const { open, setOpen, name, modalData, modalKey, title } = props;
+  console.log(modalData);
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
 
+  // let currentName = modalKey === "updatePack" ? localStorage.getItem("forModal") : name;
+
   const dispatch = useAppDispatch();
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
+  const [defValue, setDefValue] = useState(name); // FOR DEFAULT IN TextInputFormForModal
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     if (modalKey === "addPack") {
       const payload: PayloadTypeForUpdate = {
         cardsPack: {
-          name: data.email,
+          name: data.pack,
           private: data.rememberMe,
         },
       };
@@ -48,7 +52,7 @@ export const AddEditModal: React.FC<PropsType> = (props) => {
       const payload = {
         cardsPack: {
           _id: modalData!.id,
-          name: data.email,
+          name: data.pack,
           private: data.rememberMe,
         },
       };
@@ -67,12 +71,14 @@ export const AddEditModal: React.FC<PropsType> = (props) => {
         <FormWrapper>
           <InputWrapper>
             <TextInputFormForModal
-              name="email"
-              label="Email"
-              rules={{ required: "Email is required" }}
+              name="pack"
+              label="Pack"
+              // rules={{ required: "Pack is required" }}
               control={control}
-              errors={errors.email}
-              defaultValue={name}
+              errors={errors.pack}
+              defaultValue={"ddddd"}
+              defValue={defValue}
+              setDefValue={setDefValue}
             />
           </InputWrapper>
 

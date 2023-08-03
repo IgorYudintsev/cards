@@ -40,7 +40,7 @@ const addPack = createAppAsyncThunk<any, { userIDfromProfile: string; payload: {
       const payload: { cardsPack: AddPack } = arg.payload;
       const { dispatch, rejectWithValue } = thunkAPI;
       await packsApi.addPack(payload);
-      dispatch(getPacks(loadState() ? { user_id: arg.userIDfromProfile, pageCount: 10 } : { pageCount: 10 }));
+      dispatch(getPacks(loadState("myCards") ? { user_id: arg.userIDfromProfile, pageCount: 10 } : { pageCount: 10 }));
       //  arg.setDisabled(false);
     });
   }
@@ -53,7 +53,7 @@ const deletePack = createAppAsyncThunk<string, { idForDelete: string; userID: st
       console.log(arg);
       const { dispatch, rejectWithValue } = thunkAPI;
       await packsApi.deletePack(arg.idForDelete);
-      dispatch(getPacks(loadState() ? { user_id: arg.userID, pageCount: 10 } : { pageCount: 10 })); //свои колоды/не свои
+      dispatch(getPacks(loadState("myCards") ? { user_id: arg.userID, pageCount: 10 } : { pageCount: 10 })); //свои колоды/не свои
     });
   }
 );
@@ -64,7 +64,7 @@ const updatePack = createAppAsyncThunk<{ payload: UpdatePack; userID: string }, 
     return thunkTryCatch(thunkAPI, async () => {
       const { dispatch, rejectWithValue } = thunkAPI;
       await packsApi.updatePack(arg.payload);
-      dispatch(getPacks(loadState() ? { user_id: arg.userID, pageCount: 10 } : { pageCount: 10 }));
+      dispatch(getPacks(loadState("myCards") ? { user_id: arg.userID, pageCount: 10 } : { pageCount: 10 }));
     });
   }
 );

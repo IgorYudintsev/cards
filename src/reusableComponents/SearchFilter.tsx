@@ -47,12 +47,14 @@ export const SearchFilter: React.FC<PropsType> = (props) => {
   };
 
   const myHandler = () => {
-    saveState();
+    saveState("myCards");
     dispatch(packsThunks.getPacks({ ...payloadPacks, user_id: userIDfromProfile, pageCount: 10 }));
   };
 
   const cleanHandler = () => {
-    dispatch(packsThunks.getPacks(loadState() ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 }));
+    dispatch(
+      packsThunks.getPacks(loadState("myCards") ? { user_id: userIDfromProfile, pageCount: 10 } : { pageCount: 10 })
+    );
     setValueRange([0, 100]);
     setTitleSearch("");
     setRowsPerPage(10);
@@ -75,7 +77,7 @@ export const SearchFilter: React.FC<PropsType> = (props) => {
   }, [debouncedValue]);
 
   useEffect(() => {
-    loadState() ? setVariant(true) : setVariant(false);
+    loadState("myCards") ? setVariant(true) : setVariant(false);
   }, []);
 
   return (

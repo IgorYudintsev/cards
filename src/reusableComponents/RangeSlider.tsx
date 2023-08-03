@@ -28,13 +28,13 @@ export const RangeSlider: React.FC<PropsType> = ({ setValue, value, payloadPacks
 
   const handleChangeCommitted = (event: React.SyntheticEvent | Event, value: number | Array<number>) => {
     if (Array.isArray(value)) {
-      dispatch(packsThunks.getPacks(localHelper(userIDfromProfile, payloadPacks)));
+      dispatch(packsThunks.getPacks(localHelper("myCards", userIDfromProfile, payloadPacks)));
     }
   };
 
   useEffect(() => {
     if (value[0] !== 0 || value[1] !== 100) {
-      dispatch(packsThunks.getPacks(localHelper(userIDfromProfile, payloadPacks)));
+      dispatch(packsThunks.getPacks(localHelper("myCards", userIDfromProfile, payloadPacks)));
     }
   }, []);
 

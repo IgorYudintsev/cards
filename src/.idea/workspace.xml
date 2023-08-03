@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="35e49a94-c805-4d71-b69c-f961deaca5ce" name="Changes" comment="" />
+    <list default="true" id="35e49a94-c805-4d71-b69c-f961deaca5ce" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/components/Packs/Packs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Packs/Packs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/packs/packs.slice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/features/packs/packs.slice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reusableComponents/CurrentPacks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/reusableComponents/CurrentPacks.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reusableComponents/InputWithoutForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/reusableComponents/InputWithoutForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reusableComponents/RangeSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/reusableComponents/RangeSlider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reusableComponents/SearchFilter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/reusableComponents/SearchFilter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reusableComponents/TextInputFormForModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/reusableComponents/TextInputFormForModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reusableModal/AddEditModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/reusableModal/AddEditModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/localStorage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/localStorage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src00000000000000000000000.rar" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,6 +42,7 @@
       <option name="presentableId" value="Default" />
       <updated>1690652782629</updated>
       <workItem from="1690652784609" duration="5000" />
+      <workItem from="1690962021432" duration="617000" />
     </task>
     <servers />
   </component>

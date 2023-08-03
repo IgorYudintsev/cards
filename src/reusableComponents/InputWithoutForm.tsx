@@ -32,7 +32,7 @@ export const InputWithoutForm: React.FC<PropsType> = ({
   useEffect(() => {
     if (titleSearch !== null) {
       if (payloadPacks) {
-        dispatch(packsThunks.getPacks(localHelper(userIDfromProfile, payloadPacks)));
+        dispatch(packsThunks.getPacks(localHelper("myCards", userIDfromProfile, payloadPacks)));
       }
       if (payloadCards) {
         dispatch(cardsThunks.getCards(payloadCards));

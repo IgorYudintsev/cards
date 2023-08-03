@@ -9,7 +9,7 @@ import { packsThunks } from "features/packs/packs.slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import { CardPacks } from "features/packs/packs.api";
-import { cutter } from "utils";
+import { cutter, saveState } from "utils";
 import { AddEditModal } from "reusableModal";
 
 type PropsType = {
@@ -30,6 +30,8 @@ export const CurrentPacks = ({ items }: PropsType) => {
 
   const updateHandler = (id: string, name: string) => {
     setModalData({ id, name });
+    //saveState('forModal')
+    //localStorage.setItem("forModal", name);
     setOpen(true);
     // const payload = {
     //   cardsPack: {
@@ -46,15 +48,18 @@ export const CurrentPacks = ({ items }: PropsType) => {
 
   return (
     <>
-      <AddEditModal
-        open={open}
-        setOpen={setOpen}
-        name={modalData.name}
-        title={"Update pack"}
-        modalData={modalData}
-        setModalData={setModalData}
-        modalKey={"updatePack"}
-      />
+      {modalData.name !== "" && (
+        <AddEditModal
+          open={open}
+          setOpen={setOpen}
+          name={modalData.name}
+          title={"Update pack"}
+          modalData={modalData}
+          setModalData={setModalData}
+          modalKey={"updatePack"}
+        />
+      )}
+
       {items.map((row) => (
         <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
           <TableCell component="th" scope="row">
