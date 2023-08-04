@@ -13,12 +13,14 @@ import { CurrentCards } from "reusableComponents/CurrentCards";
 import { useLocation } from "react-router-dom";
 import { packsSelector } from "features/packs/packs.selectors";
 import { cardsSelector } from "features/cards/cards.selector";
+import { GetPacksPayload } from "features/packs/packs.api";
 
 type PropsType = {
   headers: HeadersType[];
+  pack?: GetPacksPayload;
 };
 export const Spreadsheet: React.FC<PropsType> = (props) => {
-  const { headers } = props;
+  const { headers, pack } = props;
   const cards = useAppSelector(cardsSelector);
   const packs = useAppSelector(packsSelector);
   const location = useLocation();
@@ -52,7 +54,11 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {location.pathname === "/packs" ? <CurrentPacks items={sortedPacks} /> : <CurrentCards items={cards} />}
+            {location.pathname === "/packs" && pack ? (
+              <CurrentPacks items={sortedPacks} pack={pack} />
+            ) : (
+              <CurrentCards items={cards} />
+            )}
           </TableBody>
         </Table>
       </TableContainer>

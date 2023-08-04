@@ -8,12 +8,16 @@ import { packsThunks } from "features/packs/packs.slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 import { TextInputFormForModal } from "reusableComponents/TextInputFormForModal";
+import { GetPacksPayload } from "features/packs/packs.api";
 
 type PropsType = {
   open: boolean;
   setOpen: (open: boolean) => void;
   name: string;
+  modalData?: { id: string; name: string };
+  setModalData?: (data: { id: string; name: string }) => void;
   title: string;
+  pack: GetPacksPayload;
 };
 
 export type Inputs = {
@@ -21,8 +25,8 @@ export type Inputs = {
   rememberMe: boolean;
 };
 
-export const AddModal: React.FC<PropsType> = (props) => {
-  const { open, setOpen, name, title } = props;
+export const EditPackModal: React.FC<PropsType> = (props) => {
+  const { open, setOpen, name, modalData, title, pack } = props;
 
   const {
     control,
@@ -34,13 +38,14 @@ export const AddModal: React.FC<PropsType> = (props) => {
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    const payload: PayloadTypeForUpdate = {
+    const payload = {
       cardsPack: {
+        _id: modalData!.id,
         name: data.pack,
         private: data.rememberMe,
       },
     };
-    dispatch(packsThunks.addPack({ userIDfromProfile: userIDfromProfile, payload }));
+    dispatch(packsThunks.updatePack({ pack, payload, userID: userIDfromProfile }));
     setOpen(false);
   };
 

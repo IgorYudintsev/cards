@@ -8,9 +8,10 @@ type ButtonProps = {
   variant: string;
   control: Control<any>;
   buttonName: string;
+  color?: string;
 };
 
-export const ButtonComponentForm: React.FC<ButtonProps> = ({ control, variant, buttonName }) => {
+export const ButtonComponentForm: React.FC<ButtonProps> = ({ control, variant, buttonName, color }) => {
   const isDesabled = useAppSelector(isLoadingSelector);
   return (
     <Controller
@@ -18,7 +19,7 @@ export const ButtonComponentForm: React.FC<ButtonProps> = ({ control, variant, b
       control={control}
       render={({ field, fieldState }) => (
         <>
-          <Button variant="contained" type="submit" disabled={isDesabled}>
+          <Button variant="contained" type="submit" disabled={isDesabled} color={color ? "error" : "primary"}>
             {buttonName}
           </Button>
         </>

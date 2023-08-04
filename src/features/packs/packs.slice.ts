@@ -58,13 +58,17 @@ const deletePack = createAppAsyncThunk<string, { idForDelete: string; userID: st
   }
 );
 
-const updatePack = createAppAsyncThunk<{ payload: UpdatePack; userID: string }, any>(
+const updatePack = createAppAsyncThunk<{ pack: GetPacksPayload; payload: UpdatePack; userID: string }, any>(
   "packs/updatePack",
   async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
       const { dispatch, rejectWithValue } = thunkAPI;
       await packsApi.updatePack(arg.payload);
-      dispatch(getPacks(loadState("myCards") ? { user_id: arg.userID, pageCount: 10 } : { pageCount: 10 }));
+      dispatch(
+        getPacks(
+          loadState("myCards") ? { ...arg.pack, user_id: arg.userID, pageCount: 10 } : { ...arg.pack, pageCount: 10 }
+        )
+      );
     });
   }
 );

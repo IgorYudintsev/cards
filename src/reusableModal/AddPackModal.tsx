@@ -13,9 +13,6 @@ type PropsType = {
   open: boolean;
   setOpen: (open: boolean) => void;
   name: string;
-  modalData?: { id: string; name: string };
-  setModalData?: (data: { id: string; name: string }) => void;
-  modalKey: "updatePack" | "addPack";
   title: string;
 };
 
@@ -24,9 +21,9 @@ export type Inputs = {
   rememberMe: boolean;
 };
 
-export const EditModal: React.FC<PropsType> = (props) => {
-  const { open, setOpen, name, modalData, modalKey, title } = props;
-  console.log(modalData);
+export const AddPackModal: React.FC<PropsType> = (props) => {
+  const { open, setOpen, name, title } = props;
+
   const {
     control,
     handleSubmit,
@@ -35,27 +32,15 @@ export const EditModal: React.FC<PropsType> = (props) => {
 
   const dispatch = useAppDispatch();
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
-  const [defValue, setDefValue] = useState(name); // FOR DEFAULT IN TextInputFormForModal
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    if (modalKey === "addPack") {
-      const payload: PayloadTypeForUpdate = {
-        cardsPack: {
-          name: data.pack,
-          private: data.rememberMe,
-        },
-      };
-      dispatch(packsThunks.addPack({ userIDfromProfile: userIDfromProfile, payload }));
-    } else {
-      const payload = {
-        cardsPack: {
-          _id: modalData!.id,
-          name: data.pack,
-          private: data.rememberMe,
-        },
-      };
-      dispatch(packsThunks.updatePack({ payload, userID: userIDfromProfile }));
-    }
+    const payload: PayloadTypeForUpdate = {
+      cardsPack: {
+        name: data.pack,
+        private: data.rememberMe,
+      },
+    };
+    dispatch(packsThunks.addPack({ userIDfromProfile: userIDfromProfile, payload }));
     setOpen(false);
   };
 

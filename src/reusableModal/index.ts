@@ -1,3 +1,4 @@
-export { AddModal } from "reusableModal/AddModal";
-export { EditModal } from "reusableModal/EditModal";
+export { AddPackModal } from "reusableModal/AddPackModal";
+export { EditPackModal } from "reusableModal/EditPackModal";
+export { DeletePackModal } from "reusableModal/DeletePackModal";
 export { BasicModal } from "./BasicModal";

@@ -6,7 +6,7 @@ import { ButtonComponent, Pagination, SearchFilter, Spreadsheet } from "reusable
 import { loadState, useDebounce } from "utils";
 import { S } from "features/cardsPacksStyles/CardsPacks_styles";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
-import { AddModal } from "reusableModal/AddModal";
+import { AddPackModal } from "reusableModal/AddPackModal";
 
 export type HeadersType = {
   name: string;
@@ -71,7 +71,7 @@ export const Packs = () => {
 
   return (
     <div>
-      <AddModal open={open} setOpen={setOpen} name={"Add new Pack"} title={"Add new pack"} />
+      <AddPackModal open={open} setOpen={setOpen} name={"Add new Pack"} title={"Add new pack"} />
       <S.HeaderBlock>
         <h1 style={{ marginTop: "-10px" }}>Packs list</h1>
         <ButtonComponent buttonName={"Add new pack"} callback={addPackHandler} disabled={false} />
@@ -85,7 +85,7 @@ export const Packs = () => {
         payloadPacks={pack}
         payloadKey={payloadKey}
       />
-      <Spreadsheet headers={headers} />
+      <Spreadsheet headers={headers} pack={pack} />
       <S.PaginationStyle>
         <Pagination
           rowsPerPage={rowsPerPage}
