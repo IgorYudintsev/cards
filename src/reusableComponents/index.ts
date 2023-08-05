@@ -13,3 +13,4 @@ export { SearchFilter } from "./SearchFilter";
 export { Spreadsheet } from "./Spreadsheet";
 export { TableHeader } from "./TableHeader";
 export { TextInputForm } from "./TextInputForm";
+export { TextInputFormForModal } from "./TextInputFormForModal";

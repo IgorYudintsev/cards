@@ -10,6 +10,7 @@ import { ButtonComponent } from "reusableComponents/ButtonComponent";
 import { Pagination } from "reusableComponents/Pagination";
 import { SearchFilter } from "reusableComponents/SearchFilter";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
+import { AddCardModal } from "reusableModal";
 
 export const Cards = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ export const Cards = () => {
   const [valueRange, setValueRange] = React.useState<number[]>([0, 100]); //RANGE
   const [titleSearch, setTitleSearch] = useState<string | null>(null); //SEARCH
   let [conditionForPage0, setConditionForPage0] = useState(true);
+  const [open, setOpen] = React.useState(false); //MODAL
 
   const cards: CardsPayload = {
     cardsPack_id: paramsID,
@@ -50,13 +52,15 @@ export const Cards = () => {
   }, []);
 
   const addCardHandler = () => {
-    dispatch(cardsThunks.addCard(cards));
+    setOpen(true);
+    //dispatch(cardsThunks.addCard(cards));
   };
 
   const payloadKey = "cards";
 
   return (
     <>
+      <AddCardModal open={open} setOpen={setOpen} title={"Add new Card"} paramsID={paramsID} />
       <S.HeaderBlock>
         <h1 style={{ marginTop: "-10px" }}>Cards list</h1>
         <ButtonComponent

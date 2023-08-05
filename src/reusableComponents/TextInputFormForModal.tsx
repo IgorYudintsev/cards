@@ -31,13 +31,12 @@ export const TextInputFormForModal: React.FC<TextInputProps> = (props) => {
               field.onChange(e);
             }}
             sx={{ m: 1 }}
-            label={label}
+            label={currentError}
             error={Boolean(fieldState.error)}
             variant="filled"
             defaultValue={defaultValue}
             fullWidth={true}
           />
-          {errors && <span style={{ color: "red" }}>{currentError}</span>}
         </>
       )}
     />
