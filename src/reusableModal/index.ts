@@ -4,5 +4,6 @@ export { DeletePackModal } from "reusableModal/DeletePackModal";
 export { BasicModal } from "./BasicModal";
 
 export { AddCardModal } from "./AddCardModal";
+export { UpdateCardModal } from "./UpdateCardModal";
 
 export { BasicSelect } from "./BasicSelect";

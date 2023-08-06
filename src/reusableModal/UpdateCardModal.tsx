@@ -6,12 +6,13 @@ import styled from "styled-components";
 import { useAppDispatch } from "app/hooks";
 import { TextInputFormForModal } from "reusableComponents";
 import { cardsThunks } from "features/cards/cards.slice";
+import { CardType } from "features/cards/cards.api";
 
 type PropsType = {
   open: boolean;
   setOpen: (open: boolean) => void;
-  paramsID: string;
   title: string;
+  modalData: CardType;
 };
 
 export type Inputs = {
@@ -19,8 +20,8 @@ export type Inputs = {
   answer: string;
 };
 
-export const AddCardModal: React.FC<PropsType> = (props) => {
-  const { open, setOpen, title, paramsID } = props;
+export const UpdateCardModal: React.FC<PropsType> = (props) => {
+  const { open, setOpen, title, modalData } = props;
 
   const {
     control,
@@ -31,7 +32,14 @@ export const AddCardModal: React.FC<PropsType> = (props) => {
   const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    dispatch(cardsThunks.addCard({ question: data.question, answer: data.answer, cardsPack_id: paramsID }));
+    // dispatch(cardsThunks.addCard({ question: data.question, answer: data.answer, cardsPack_id: paramsID }));
+    dispatch(
+      cardsThunks.updateCard({
+        ...modalData,
+        question: data.question,
+        answer: data.answer,
+      })
+    );
     setOpen(false);
   };
 
@@ -54,7 +62,7 @@ export const AddCardModal: React.FC<PropsType> = (props) => {
               rules={{ required: "Question is required" }}
               control={control}
               errors={errors.question}
-              defaultValue={"How des it work in React?"}
+              defaultValue={modalData.question ? modalData.question : "How des it work in React?"}
             />
           </InputWrapper>
           <InputWrapper>
@@ -64,7 +72,7 @@ export const AddCardModal: React.FC<PropsType> = (props) => {
               rules={{ required: "Answer is required" }}
               control={control}
               errors={errors.answer}
-              defaultValue={"It works..."}
+              defaultValue={modalData.answer ? modalData.answer : "It works..."}
             />
           </InputWrapper>
 

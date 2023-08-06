@@ -13,10 +13,11 @@ type TextInputProps = {
   defaultKey?: string;
 };
 
-export const TextInputFormForModal: React.FC<TextInputProps> = (props) => {
+export const TextInputFormForModalUPDATE: React.FC<TextInputProps> = (props) => {
   const { name, control, label, rules, errors, defaultValue } = props;
   const currentError = errors?.type === "required" ? "This field is required" : "";
   const [defValue, setDefValue] = useState(defaultValue);
+  console.log("defValue:", defValue);
 
   return (
     <Controller

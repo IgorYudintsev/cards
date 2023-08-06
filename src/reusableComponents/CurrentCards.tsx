@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import IconButton from "@mui/material/IconButton";
@@ -11,6 +11,7 @@ import { cutter } from "utils";
 import { cardsThunks } from "features/cards/cards.slice";
 import { isLoadingSelector } from "app/app.selectors";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
+import { EditPackModal, UpdateCardModal } from "reusableModal";
 
 type PropsType = {
   items: CardType[];
@@ -20,6 +21,8 @@ export const CurrentCards = ({ items }: PropsType) => {
   const dispatch = useAppDispatch();
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
   const isLoading = useAppSelector(isLoadingSelector);
+  const [open, setOpen] = useState(false); //MODAL
+  const [modalData, setModalData] = useState<CardType>({ cardsPack_id: "" });
 
   const deleteHandler = (cardId: string | undefined, cardsPack_id: string | undefined) => {
     if (cardId && cardsPack_id) {
@@ -27,19 +30,32 @@ export const CurrentCards = ({ items }: PropsType) => {
     }
   };
 
-  const updateHandler = (cardId: string | undefined, cardsPack_id: string | undefined) => {
+  const updateHandler = (
+    cardId: string | undefined,
+    cardsPack_id: string | undefined,
+    question: string | undefined,
+    answer: string | undefined
+  ) => {
     if (cardId && cardsPack_id) {
-      const payload: CardType = {
+      setModalData({
         _id: cardId,
         cardsPack_id,
-        question: "new question",
-      };
-      dispatch(cardsThunks.updateCard(payload));
+        question,
+        answer,
+      });
+      setOpen(true);
+      // const payload: CardType = {
+      //   _id: cardId,
+      //   cardsPack_id,
+      //   question: "new question",
+      // };
+      // dispatch(cardsThunks.updateCard(payload));
     }
   };
 
   return (
     <>
+      <UpdateCardModal open={open} setOpen={setOpen} title={"Update card"} modalData={modalData} />
       {items.map((row) => (
         <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
           <TableCell component="th" scope="row">
@@ -71,7 +87,7 @@ export const CurrentCards = ({ items }: PropsType) => {
                 <IconButton
                   aria-label="update"
                   disabled={isLoading}
-                  onClick={() => updateHandler(row._id, row.cardsPack_id)}
+                  onClick={() => updateHandler(row._id, row.cardsPack_id, row.question, row.answer)}
                 >
                   <EditIcon />
                 </IconButton>
