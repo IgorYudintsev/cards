@@ -11,7 +11,8 @@ import { cutter } from "utils";
 import { cardsThunks } from "features/cards/cards.slice";
 import { isLoadingSelector } from "app/app.selectors";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
-import { EditPackModal, UpdateCardModal } from "reusableModal";
+import { DeletePackModal, EditPackModal, UpdateCardModal } from "reusableModal";
+import { DeleteCardModal } from "reusableModal/DeleteCardModal";
 
 type PropsType = {
   items: CardType[];
@@ -22,11 +23,19 @@ export const CurrentCards = ({ items }: PropsType) => {
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
   const isLoading = useAppSelector(isLoadingSelector);
   const [open, setOpen] = useState(false); //MODAL
+  const [openDelete, setOpenDelete] = useState(false); //MODAL DELETE
   const [modalData, setModalData] = useState<CardType>({ cardsPack_id: "" });
+  const [modalDataDELETE, setModalDataDELETE] = useState({ question: "", user_id: "", cardsPack_id: "" });
 
-  const deleteHandler = (cardId: string | undefined, cardsPack_id: string | undefined) => {
-    if (cardId && cardsPack_id) {
-      dispatch(cardsThunks.deleteCard({ userID: cardId, cardsPack_id }));
+  const deleteHandler = (
+    question: string | undefined,
+    cardId: string | undefined,
+    cardsPack_id: string | undefined
+  ) => {
+    if (cardId && cardsPack_id && question) {
+      setModalDataDELETE({ question, user_id: cardId, cardsPack_id });
+      setOpenDelete(true);
+      // dispatch(cardsThunks.deleteCard({ userID: cardId, cardsPack_id }));
     }
   };
 
@@ -49,6 +58,12 @@ export const CurrentCards = ({ items }: PropsType) => {
 
   return (
     <>
+      <DeleteCardModal
+        openDelete={openDelete}
+        setOpenDelete={setOpenDelete}
+        title={"Delete pack"}
+        modalDataDELETE={modalDataDELETE}
+      />
       <UpdateCardModal open={open} setOpen={setOpen} title={"Update card"} modalData={modalData} />
       {items.map((row) => (
         <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
@@ -74,7 +89,7 @@ export const CurrentCards = ({ items }: PropsType) => {
                 <IconButton
                   aria-label="delete"
                   disabled={isLoading}
-                  onClick={() => deleteHandler(row._id, row.cardsPack_id)}
+                  onClick={() => deleteHandler(row.question, row._id, row.cardsPack_id)}
                 >
                   <DeleteIcon />
                 </IconButton>

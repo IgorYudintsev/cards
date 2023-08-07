@@ -25,7 +25,6 @@ export const CurrentPacks = ({ items, pack }: PropsType) => {
   const [open, setOpen] = useState(false); //MODAL
   const [openDelete, setOpenDelete] = useState(false); //MODAL DELETE
   const [modalData, setModalData] = useState<{ id: string; name: string }>({ id: "", name: "" });
-  //const [defValue, setDefValue] = useState("");
 
   const deleteHandler = (id: string, name: string) => {
     setModalData({ id, name });
@@ -34,9 +33,7 @@ export const CurrentPacks = ({ items, pack }: PropsType) => {
   };
 
   const updateHandler = (id: string, name: string) => {
-    //setDefValue("");
     setModalData({ id, name });
-    //setDefValue(name);
     setOpen(true);
   };
 
