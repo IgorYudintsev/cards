@@ -25,6 +25,7 @@ export const AddCardModal: React.FC<PropsType> = (props) => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -33,6 +34,7 @@ export const AddCardModal: React.FC<PropsType> = (props) => {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     dispatch(cardsThunks.addCard({ question: data.question, answer: data.answer, cardsPack_id: paramsID }));
     setOpen(false);
+    reset();
   };
 
   const setOpenHandler = () => {

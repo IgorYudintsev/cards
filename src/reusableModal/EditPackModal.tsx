@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { BasicModal } from "reusableModal";
 import { ButtonComponent, ButtonComponentForm, CheckBox } from "reusableComponents";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
-import { PayloadTypeForUpdate } from "components/Packs/Packs";
 import { packsThunks } from "features/packs/packs.slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 import { TextInputFormForModal } from "reusableComponents/TextInputFormForModal";
 import { GetPacksPayload } from "features/packs/packs.api";
-import { TextInputFormForModalUPDATE } from "reusableComponents";
 
 type PropsType = {
   open: boolean;
@@ -19,8 +17,6 @@ type PropsType = {
   setModalData?: (data: { id: string; name: string }) => void;
   title: string;
   pack: GetPacksPayload;
-  // defValue: string;
-  // setDefValue: (defValue: string) => void;
 };
 
 export type Inputs = {
@@ -49,7 +45,6 @@ export const EditPackModal: React.FC<PropsType> = (props) => {
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log("name:", data.pack);
     const payload = {
       cardsPack: {
         _id: modalData!.id,
@@ -71,15 +66,13 @@ export const EditPackModal: React.FC<PropsType> = (props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormWrapper>
           <InputWrapper>
-            <TextInputFormForModalUPDATE
+            <TextInputFormForModal
               name="pack"
               label="Pack"
-              //rules={{ required: "Pack is required" }}
+              rules={{ required: "Pack is required" }}
               control={control}
               errors={errors.pack}
               defaultValue={name}
-              // defValue={defValue}
-              // setDefValue={setDefValue}
             />
           </InputWrapper>
 

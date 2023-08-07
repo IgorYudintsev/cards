@@ -44,12 +44,6 @@ export const CurrentCards = ({ items }: PropsType) => {
         answer,
       });
       setOpen(true);
-      // const payload: CardType = {
-      //   _id: cardId,
-      //   cardsPack_id,
-      //   question: "new question",
-      // };
-      // dispatch(cardsThunks.updateCard(payload));
     }
   };
 

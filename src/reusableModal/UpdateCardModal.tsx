@@ -26,6 +26,7 @@ export const UpdateCardModal: React.FC<PropsType> = (props) => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -41,6 +42,7 @@ export const UpdateCardModal: React.FC<PropsType> = (props) => {
       })
     );
     setOpen(false);
+    reset();
   };
 
   const setOpenHandler = () => {

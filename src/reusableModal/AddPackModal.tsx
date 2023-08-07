@@ -27,6 +27,7 @@ export const AddPackModal: React.FC<PropsType> = (props) => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -42,6 +43,7 @@ export const AddPackModal: React.FC<PropsType> = (props) => {
     };
     dispatch(packsThunks.addPack({ userIDfromProfile: userIDfromProfile, payload }));
     setOpen(false);
+    reset();
   };
 
   const setOpenHandler = () => {
