@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { CardsPayload } from "features/cards/cards.api";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { cardsThunks } from "features/cards/cards.slice";
@@ -11,9 +11,11 @@ import { Pagination } from "reusableComponents/Pagination";
 import { SearchFilter } from "reusableComponents/SearchFilter";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 import { AddCardModal } from "reusableModal";
+import Container from "@mui/material/Container";
 
 export const Cards = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
   let params = useParams();
   let paramsID: string = params.id!.toString();
@@ -53,42 +55,49 @@ export const Cards = () => {
 
   const addCardHandler = () => {
     setOpen(true);
-    //dispatch(cardsThunks.addCard(cards));
   };
+
+  const backToPackHandler = () => navigate("/packs");
 
   const payloadKey = "cards";
 
   return (
     <>
       <AddCardModal open={open} setOpen={setOpen} title={"Add new Card"} paramsID={paramsID} />
-      <S.HeaderBlock>
-        <h1 style={{ marginTop: "-10px" }}>Cards list</h1>
-        <ButtonComponent
-          buttonName={"Add new card"}
-          callback={addCardHandler}
-          disabled={userIDfromProfile !== paramsUserID}
-        />
-      </S.HeaderBlock>
-      <SearchFilter
-        valueRange={valueRange}
-        setValueRange={setValueRange}
-        titleSearch={titleSearch}
-        setTitleSearch={setTitleSearch}
-        setRowsPerPage={setRowsPerPage}
-        payloadCards={cards}
-        payloadKey={payloadKey}
-      />
-      <Spreadsheet headers={headers} />
+      <Container fixed>
+        <S.HeaderBlock>
+          <h4 style={{ marginTop: "11px", cursor: "pointer" }} onClick={backToPackHandler}>
+            ⏪ Back to Packs
+          </h4>
+          <h1 style={{ marginTop: "-5px" }}>Cards list</h1>
 
-      <S.PaginationStyle>
-        <Pagination
-          rowsPerPage={rowsPerPage}
+          <ButtonComponent
+            buttonName={"Add new card"}
+            callback={addCardHandler}
+            disabled={userIDfromProfile !== paramsUserID}
+          />
+        </S.HeaderBlock>
+        <SearchFilter
+          valueRange={valueRange}
+          setValueRange={setValueRange}
+          titleSearch={titleSearch}
+          setTitleSearch={setTitleSearch}
           setRowsPerPage={setRowsPerPage}
+          payloadCards={cards}
           payloadKey={payloadKey}
-          dispatchFoo={dispatchFoo}
-          conditionForPage0={conditionForPage0}
         />
-      </S.PaginationStyle>
+        <Spreadsheet headers={headers} />
+
+        <S.PaginationStyle>
+          <Pagination
+            rowsPerPage={rowsPerPage}
+            setRowsPerPage={setRowsPerPage}
+            payloadKey={payloadKey}
+            dispatchFoo={dispatchFoo}
+            conditionForPage0={conditionForPage0}
+          />
+        </S.PaginationStyle>
+      </Container>
     </>
   );
 };

@@ -45,7 +45,7 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
   }, [packs]);
 
   return (
-    <>
+    <div style={{ marginTop: "30px" }}>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -63,6 +63,6 @@ export const Spreadsheet: React.FC<PropsType> = (props) => {
         </Table>
       </TableContainer>
       {locationName.length === 0 && <h1 style={{ textAlign: "center" }}>Empty</h1>}
-    </>
+    </div>
   );
 };

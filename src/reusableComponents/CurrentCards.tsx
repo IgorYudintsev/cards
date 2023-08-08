@@ -13,6 +13,7 @@ import { isLoadingSelector } from "app/app.selectors";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 import { DeletePackModal, EditPackModal, UpdateCardModal } from "reusableModal";
 import { DeleteCardModal } from "reusableModal/DeleteCardModal";
+import Rating from "@mui/material/Rating";
 
 type PropsType = {
   items: CardType[];
@@ -77,7 +78,7 @@ export const CurrentCards = ({ items }: PropsType) => {
             {cutter(`${row.created}`, 10)}
           </TableCell>
           <TableCell size={"small"} align="center">
-            {cutter(`${row.rating}`, 13)}
+            <Rating name="half-rating-read" defaultValue={row.rating} precision={0.5} readOnly />
           </TableCell>
           <TableCell size={"small"} align="center">
             <IconButton aria-label="read" disabled={isLoading}>

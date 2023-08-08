@@ -101,13 +101,13 @@ export const SearchFilter: React.FC<PropsType> = (props) => {
       {payloadKey === "packs" && (
         <div>
           <ButtonComponent
-            buttonName={"My cards"}
+            buttonName={"My packs"}
             callback={() => setOn("MY")}
             disabled={false}
             variant={!variant ? "contained" : "outlined"}
           />
           <ButtonComponent
-            buttonName={"All cards"}
+            buttonName={"All packs"}
             callback={() => setOn("ALL")}
             disabled={false}
             variant={variant ? "contained" : "outlined"}

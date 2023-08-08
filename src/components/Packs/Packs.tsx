@@ -7,6 +7,8 @@ import { loadState, useDebounce } from "utils";
 import { S } from "features/cardsPacksStyles/CardsPacks_styles";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 import { AddPackModal } from "reusableModal/AddPackModal";
+import styled from "styled-components";
+import Container from "@mui/material/Container";
 
 export type HeadersType = {
   name: string;
@@ -72,29 +74,32 @@ export const Packs = () => {
   return (
     <div>
       <AddPackModal open={open} setOpen={setOpen} name={"Add new Pack"} title={"Add new pack"} />
-      <S.HeaderBlock>
-        <h1 style={{ marginTop: "-10px" }}>Packs list</h1>
-        <ButtonComponent buttonName={"Add new pack"} callback={addPackHandler} disabled={false} />
-      </S.HeaderBlock>
-      <SearchFilter
-        valueRange={valueRange}
-        setValueRange={setValueRange}
-        titleSearch={titleSearch}
-        setTitleSearch={setTitleSearch}
-        setRowsPerPage={setRowsPerPage}
-        payloadPacks={pack}
-        payloadKey={payloadKey}
-      />
-      <Spreadsheet headers={headers} pack={pack} />
-      <S.PaginationStyle>
-        <Pagination
-          rowsPerPage={rowsPerPage}
+      <Container fixed>
+        <S.HeaderBlock>
+          <h1 style={{ marginTop: "-10px" }}>Packs list</h1>
+          <ButtonComponent buttonName={"Add new pack"} callback={addPackHandler} disabled={false} />
+        </S.HeaderBlock>
+        <SearchFilter
+          valueRange={valueRange}
+          setValueRange={setValueRange}
+          titleSearch={titleSearch}
+          setTitleSearch={setTitleSearch}
           setRowsPerPage={setRowsPerPage}
+          payloadPacks={pack}
           payloadKey={payloadKey}
-          dispatchFoo={dispatchFoo}
-          conditionForPage0={conditionForPage0}
         />
-      </S.PaginationStyle>
+
+        <Spreadsheet headers={headers} pack={pack} />
+        <S.PaginationStyle>
+          <Pagination
+            rowsPerPage={rowsPerPage}
+            setRowsPerPage={setRowsPerPage}
+            payloadKey={payloadKey}
+            dispatchFoo={dispatchFoo}
+            conditionForPage0={conditionForPage0}
+          />
+        </S.PaginationStyle>
+      </Container>
     </div>
   );
 };
