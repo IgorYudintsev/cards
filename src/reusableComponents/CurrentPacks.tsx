@@ -18,7 +18,6 @@ type PropsType = {
 };
 
 export const CurrentPacks = ({ items, pack }: PropsType) => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const userIDfromProfile = useAppSelector((state) => state.auth.profile!._id);
   const isLoading = useAppSelector((state) => state.app.isLoading);

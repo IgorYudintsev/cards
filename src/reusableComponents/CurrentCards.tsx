@@ -14,13 +14,14 @@ import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 import { DeletePackModal, EditPackModal, UpdateCardModal } from "reusableModal";
 import { DeleteCardModal } from "reusableModal/DeleteCardModal";
 import Rating from "@mui/material/Rating";
+import { useNavigate } from "react-router-dom";
 
 type PropsType = {
   items: CardType[];
 };
 
 export const CurrentCards = ({ items }: PropsType) => {
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
   const isLoading = useAppSelector(isLoadingSelector);
   const [open, setOpen] = useState(false); //MODAL
@@ -57,6 +58,10 @@ export const CurrentCards = ({ items }: PropsType) => {
     }
   };
 
+  const navigateHandler = (card_id: string | undefined) => {
+    navigate(`/learn/${card_id}`);
+  };
+
   return (
     <>
       <DeleteCardModal
@@ -81,8 +86,7 @@ export const CurrentCards = ({ items }: PropsType) => {
             <Rating name="half-rating-read" defaultValue={row.rating} precision={0.5} readOnly />
           </TableCell>
           <TableCell size={"small"} align="center">
-            <IconButton aria-label="read" disabled={isLoading}>
-              {/*onClick={() => navigateHandler(row._id)}*/}
+            <IconButton aria-label="read" disabled={isLoading} onClick={() => navigateHandler(row._id)}>
               <SchoolIcon />
             </IconButton>
             {userIDfromProfile === row.user_id ? (

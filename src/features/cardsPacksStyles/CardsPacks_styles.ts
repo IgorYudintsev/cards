@@ -11,7 +11,22 @@ const HeaderBlock = styled.div`
   justify-content: space-around;
 `;
 
+const LearningBlock = styled.div`
+  margin-top: 50px;
+  height: 35px;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const Helper = styled.p`
+  margin-top: -1px;
+  font-size: 12px;
+  opacity: 0.5;
+`;
+
 export const S = {
-    PaginationStyle,
-    HeaderBlock
+  PaginationStyle,
+  HeaderBlock,
+  LearningBlock,
+  Helper,
 };
