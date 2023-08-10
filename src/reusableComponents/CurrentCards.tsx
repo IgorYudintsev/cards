@@ -83,7 +83,7 @@ export const CurrentCards = ({ items }: PropsType) => {
             {cutter(`${row.created}`, 10)}
           </TableCell>
           <TableCell size={"small"} align="center">
-            <Rating name="half-rating-read" defaultValue={row.rating} precision={0.5} readOnly />
+            <Rating name="half-rating-read" defaultValue={row.grade} precision={0.5} readOnly />
           </TableCell>
           <TableCell size={"small"} align="center">
             <IconButton aria-label="read" disabled={isLoading} onClick={() => navigateHandler(row._id)}>

@@ -74,6 +74,27 @@ const deleteCard = createAppAsyncThunk<any, { userID: string; cardsPack_id: stri
   }
 );
 
+const putGradeCard = createAppAsyncThunk<any, { grade: number; card_id: string }>(
+  "cards/putGradeCard",
+  async (arg, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+      const { dispatch, rejectWithValue } = thunkAPI;
+      await cardsApi.putGradeCard(arg);
+
+      let cardsPackId = sessionStorage.getItem("cardsPATH");
+      if (cardsPackId) {
+        console.log(cardsPackId.split("/"));
+        dispatch(
+          getCards({
+            cardsPack_id: cardsPackId.split("/")[3],
+            pageCount: 10,
+          })
+        );
+      }
+    });
+  }
+);
+
 export const cardsReducer = slice.reducer;
 export const cardsActions = slice.actions;
-export const cardsThunks = { getCards, addCard, deleteCard, updateCard };
+export const cardsThunks = { getCards, addCard, deleteCard, updateCard, putGradeCard };

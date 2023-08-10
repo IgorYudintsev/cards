@@ -72,7 +72,11 @@ export const router = createBrowserRouter([
 
       {
         path: "learn/:cardId",
-        element: <Learn />,
+        element: (
+          <ProtectedRoute>
+            <Learn />
+          </ProtectedRoute>
+        ),
         // ErrorBoundary: ErrorPage,
       },
     ],

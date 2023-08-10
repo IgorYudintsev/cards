@@ -14,8 +14,11 @@ export const cardsApi = {
   },
 
   deleteCard: (cardId: string) => {
-    console.log(cardId);
     return instance.delete(`cards/card?id=${cardId}`);
+  },
+
+  putGradeCard: (payload: { grade: number; card_id: string }) => {
+    return instance.put("cards/grade", { ...payload });
   },
 
   // deletePack: (packId: string) => {
