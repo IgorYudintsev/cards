@@ -13,7 +13,7 @@ const HeaderBlock = styled.div`
 
 const LearningBlock = styled.div`
   margin-top: 50px;
-  height: 35px;
+  min-height: 200px;
   display: flex;
   justify-content: space-around;
 `;

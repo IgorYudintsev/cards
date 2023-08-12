@@ -12,6 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import { ButtonComponent } from "reusableComponents";
 import styled from "styled-components";
 import { cardsThunks } from "features/cards/cards.slice";
+import { randomizerCards } from "utils/randomizerCards";
 
 export const Learn = () => {
   const dispatch = useAppDispatch();
@@ -27,8 +28,12 @@ export const Learn = () => {
   const backToCardsHandler = () => navigate(`${comeBackPath}`);
 
   const nextHandler = () => {
+    setShowAnswer(false);
     if (id) {
       dispatch(cardsThunks.putGradeCard({ grade, card_id: id }));
+      const newCard = randomizerCards(allCards);
+      //console.log(newCard);
+      navigate(`/learn/${newCard._id}`);
     }
   };
 
@@ -42,7 +47,7 @@ export const Learn = () => {
       </S.HeaderBlock>
 
       <S.LearningBlock>
-        <Paper elevation={2} style={{ width: "550px", height: "550px", padding: "20px" }}>
+        <Paper elevation={2} style={{ width: "550px", padding: "20px" }}>
           <ContentWrapper>
             <div>
               <b>Question: </b>
@@ -116,4 +121,5 @@ const ContentWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
+  margin-bottom: 20px;
 `;
