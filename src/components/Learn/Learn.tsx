@@ -21,7 +21,8 @@ export const Learn = () => {
   const allCards = useAppSelector(cardsSelector);
   let params = useParams();
   let id = params.cardId;
-  let currentlearningCard = allCards.find((f) => (f._id === id ? f : ""));
+  let currentCard = allCards.find((f) => (f._id === id ? f : ""));
+  let [currentlearningCard, setCurrentlearningCard] = useState(currentCard);
   let [showAnswer, setShowAnswer] = useState(false);
   let [grade, setGrade] = useState(1);
 
@@ -32,7 +33,7 @@ export const Learn = () => {
     if (id) {
       dispatch(cardsThunks.putGradeCard({ grade, card_id: id }));
       const newCard = randomizerCards(allCards);
-      //console.log(newCard);
+      setCurrentlearningCard(newCard);
       navigate(`/learn/${newCard._id}`);
     }
   };

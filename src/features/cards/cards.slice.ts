@@ -83,11 +83,10 @@ const putGradeCard = createAppAsyncThunk<any, { grade: number; card_id: string }
 
       let cardsPackId = sessionStorage.getItem("cardsPATH");
       if (cardsPackId) {
-        console.log(cardsPackId.split("/"));
         dispatch(
           getCards({
             cardsPack_id: cardsPackId.split("/")[3],
-            pageCount: 10,
+            pageCount: 50,
           })
         );
       }
