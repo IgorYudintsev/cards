@@ -69,6 +69,7 @@ const Wrapper = styled.span`
 
 const ButtonCase = styled.span`
   height: 60px;
+  //width: ;
 
   & > button {
     margin-top: 10px;

@@ -21,7 +21,7 @@ export const ButtonComponent: React.FC<PropsType> = ({
   };
   return (
     <Button
-      style={{ marginLeft: "3px", width: width ? "50px" : "250px" }}
+      style={{ marginLeft: "3px", minWidth: width ? "250px" : "100px" }}
       variant={variant}
       type="submit"
       onClick={onclickHandler}

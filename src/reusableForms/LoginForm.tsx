@@ -8,6 +8,7 @@ import { PasswordTextInputForm } from "reusableComponents/PasswordTextInputForm"
 import { Link } from "react-router-dom";
 import { CheckBox } from "reusableComponents/CheckBox";
 import { ButtonComponentForm } from "reusableComponents/ButtonComponentForm";
+import styled from "styled-components";
 
 type LoginFormProps = {
   title: string;
@@ -47,14 +48,16 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
           <S.FormWrapper>
             <h2 style={{ fontFamily: "Montserrat" }}>{title}</h2>
 
-            <TextInputForm
-              name="email"
-              label="Email"
-              rules={{ required: "Email is required" }}
-              control={control}
-              errors={errors.email}
-              defaultValue={"developeryudintsev@gmail.com"}
-            />
+            <TextInputFormWrapper>
+              <TextInputForm
+                name="email"
+                label="Email"
+                rules={{ required: "Email is required" }}
+                control={control}
+                errors={errors.email}
+                defaultValue={"developeryudintsev@gmail.com"}
+              />
+            </TextInputFormWrapper>
 
             <PasswordTextInputForm
               name={"password"}
@@ -86,3 +89,7 @@ export const LoginForm: React.FC<LoginFormProps> = (props) => {
     </S.Wrapper>
   );
 };
+
+const TextInputFormWrapper = styled.span`
+  width: 95%;
+`;
