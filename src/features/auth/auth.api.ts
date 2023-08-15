@@ -67,6 +67,7 @@ export type ProfileType = {
   updated: string;
   __v: number;
   token: string;
+  avatar: string;
   tokenDeathTime: number;
 };
 

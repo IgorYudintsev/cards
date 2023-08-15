@@ -5,15 +5,17 @@ import { ButtonComponent } from "reusableComponents";
 import { Avatar } from "@mui/material";
 import { useAppSelector } from "app/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
-import ava from "assets/icon/ava.jpg";
 import { MenuListComposition } from "reusableComponents";
 import { loginedSelector } from "features/auth/auth.selectors";
+import defaultAva from "assets/icon/ava.jpg";
 
 type PropsType = {
   disabled?: boolean;
 };
 
 export const Header: React.FC<PropsType> = (props) => {
+  const profile = useAppSelector((state) => state.auth.profile);
+  // const [ava, setAva] = useState(profile ? profile!.avatar : defaultAva);
   const { disabled = false } = props;
   const location = useLocation();
   const logined = useAppSelector(loginedSelector);
@@ -43,7 +45,12 @@ export const Header: React.FC<PropsType> = (props) => {
           <LoginWrapper>
             <MenuListComposition />
             {/*<NameSpan>{profile.name}</NameSpan>*/}
-            <Avatar style={{ marginTop: "-7px" }} alt="Remy Sharp" src={ava} sx={{ width: 40, height: 40 }} />
+            <Avatar
+              style={{ marginTop: "-7px" }}
+              alt="Remy Sharp"
+              src={profile ? profile!.avatar : defaultAva}
+              sx={{ width: 40, height: 40 }}
+            />
           </LoginWrapper>
         ) : (
           <ButtonCase>

@@ -1,14 +1,11 @@
 import React, { KeyboardEvent, useRef, useState } from "react";
-import ava from "assets/icon/ava.jpg";
-
 import Paper from "@mui/material/Paper";
-import Avatar from "@mui/material/Avatar";
 import styled from "styled-components";
 import { authThunks } from "features/auth/auth.slice";
 import panIcon from "assets/icon/pan.jpg";
 import TextField from "@mui/material/TextField";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { ButtonComponent } from "reusableComponents";
+import { ButtonComponent, InputTypeFile } from "reusableComponents";
 
 export const Profile = () => {
   const profile = useAppSelector((state) => state.auth.profile);
@@ -46,11 +43,9 @@ export const Profile = () => {
       <Paper elevation={2} style={{ width: "350px" }}>
         <FormWrapper>
           <h2 style={{ fontFamily: "Montserrat" }}>Personal Information</h2>
-
           <AvatarWrapper>
-            <Avatar alt="Remy Sharp" src={ava} sx={{ width: 124, height: 124 }} />
+            <InputTypeFile />
           </AvatarWrapper>
-
           <NameWrapper>
             {edit ? (
               <TextField
