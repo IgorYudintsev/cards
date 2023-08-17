@@ -8,6 +8,8 @@ import { packsThunks } from "features/packs/packs.slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 import { TextInputFormForModal } from "reusableComponents/TextInputFormForModal";
+import { Link } from "react-router-dom";
+import { InputTypeFileModal } from "reusableComponents/InputTypeFileModal";
 
 type PropsType = {
   open: boolean;
@@ -19,6 +21,7 @@ type PropsType = {
 export type Inputs = {
   pack: string;
   rememberMe: boolean;
+  deckCover: string;
 };
 
 export const AddPackModal: React.FC<PropsType> = (props) => {
@@ -35,10 +38,12 @@ export const AddPackModal: React.FC<PropsType> = (props) => {
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
     const payload: PayloadTypeForUpdate = {
       cardsPack: {
         name: data.pack,
         private: data.rememberMe,
+        deckCover: data.deckCover,
       },
     };
     dispatch(packsThunks.addPack({ userIDfromProfile: userIDfromProfile, payload }));
@@ -54,6 +59,7 @@ export const AddPackModal: React.FC<PropsType> = (props) => {
     <BasicModal open={open} setOpen={setOpen} title={title}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormWrapper>
+          <InputTypeFileModal name="deckCover" control={control} />
           <InputWrapper>
             <TextInputFormForModal
               name="pack"

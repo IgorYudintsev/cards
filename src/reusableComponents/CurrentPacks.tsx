@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { CardPacks, GetPacksPayload } from "features/packs/packs.api";
 import { cutter, saveState } from "utils";
 import { DeletePackModal, EditPackModal } from "reusableModal";
+import styled from "styled-components";
 
 type PropsType = {
   items: CardPacks[];
@@ -57,14 +58,17 @@ export const CurrentPacks = ({ items, pack }: PropsType) => {
         modalData={modalData}
         setModalData={setModalData}
         pack={pack}
-        // defValue={defValue}
-        // setDefValue={setDefValue}
       />
 
       {items.map((row) => (
         <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
           <TableCell component="th" scope="row">
-            {cutter(row.name, 13)}
+            <PictureWrapper>
+              {row.deckCover !== undefined && <img src={row.deckCover} alt={""} style={{ width: 50 }} />}
+              <NameWrapper>
+                <span style={{ marginLeft: "7px" }}>{cutter(row.name, 13)}</span>
+              </NameWrapper>
+            </PictureWrapper>
           </TableCell>
           <TableCell size={"small"} align="center">
             {row.cardsCount}
@@ -97,3 +101,12 @@ export const CurrentPacks = ({ items, pack }: PropsType) => {
     </>
   );
 };
+
+const PictureWrapper = styled.span`
+  display: flex;
+`;
+const NameWrapper = styled.span`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
