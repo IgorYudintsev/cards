@@ -53,6 +53,7 @@ export const CurrentPacks = ({ items, pack }: PropsType) => {
         openDelete={openDelete}
         setOpenDelete={setOpenDelete}
         title={"Delete pack"}
+        pack={pack}
         modalData={modalData}
       />
 

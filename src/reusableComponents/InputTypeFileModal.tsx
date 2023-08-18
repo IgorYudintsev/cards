@@ -2,8 +2,6 @@ import React, { ChangeEvent, useState } from "react";
 import defaultAva from "assets/icon/ava.jpg";
 import { toast } from "react-toastify";
 import styled from "styled-components";
-import { authThunks } from "features/auth/auth.slice";
-import { useAppDispatch, useAppSelector } from "app/hooks";
 import { Control, Controller } from "react-hook-form";
 
 type PropsType = {
@@ -15,13 +13,7 @@ type PropsType = {
 
 export const InputTypeFileModal: React.FC<PropsType> = (props) => {
   const { name, control, modalKey, deckCover } = props;
-  const profile = useAppSelector((state) => state.auth.profile);
-  const imgForUpdate = useAppSelector((state) => state.packs.cardPacks);
   const [ava, setAva] = useState(deckCover || defaultAva);
-  //const [avaUpdate, setAvaUpdate] = useState(deckCover);
-
-  // const [ava, setAva] = useState(profile ? profile!.avatar : defaultAva);
-  // const [avaUpdate, setAvaUpdate] = useState(deckCover);
 
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>, field: any) => {
     if (e.target.files && e.target.files.length) {

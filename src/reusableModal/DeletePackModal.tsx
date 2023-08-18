@@ -6,12 +6,14 @@ import styled from "styled-components";
 import { packsThunks } from "features/packs/packs.slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
+import { GetPacksPayload } from "features/packs/packs.api";
 
 type PropsType = {
   openDelete: boolean;
   setOpenDelete: (open: boolean) => void;
   modalData: { id: string; name: string };
   title: string;
+  pack: GetPacksPayload;
 };
 
 export type Inputs = {
@@ -20,14 +22,14 @@ export type Inputs = {
 };
 
 export const DeletePackModal: React.FC<PropsType> = (props) => {
-  const { openDelete, setOpenDelete, modalData, title } = props;
+  const { openDelete, setOpenDelete, modalData, title, pack } = props;
   const { control, handleSubmit } = useForm<Inputs>();
 
   const dispatch = useAppDispatch();
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    dispatch(packsThunks.deletePack({ idForDelete: modalData.id, userID: userIDfromProfile }));
+    dispatch(packsThunks.deletePack({ idForDelete: modalData.id, userID: userIDfromProfile, pack }));
     setOpenDelete(false);
   };
 
