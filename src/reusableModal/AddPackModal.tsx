@@ -38,6 +38,7 @@ export const AddPackModal: React.FC<PropsType> = (props) => {
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
     const payload: PayloadTypeForUpdate = {
       cardsPack: {
         name: data.pack,

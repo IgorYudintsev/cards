@@ -53,9 +53,7 @@ export const UpdateCardModal: React.FC<PropsType> = (props) => {
     <BasicModal open={open} setOpen={setOpen} title={title}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormWrapper>
-          <SelectWrapper>
-            <BasicSelect />
-          </SelectWrapper>
+          <SelectWrapper>{/*<BasicSelect />*/}</SelectWrapper>
 
           <InputWrapper>
             <TextInputFormForModal

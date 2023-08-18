@@ -12,6 +12,7 @@ import { SearchFilter } from "reusableComponents/SearchFilter";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 import { AddCardModal } from "reusableModal";
 import Container from "@mui/material/Container";
+import styled from "styled-components";
 
 export const Cards = () => {
   const dispatch = useAppDispatch();

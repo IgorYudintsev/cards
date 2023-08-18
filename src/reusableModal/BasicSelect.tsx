@@ -5,8 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-export const BasicSelect = () => {
-  const [select, setSelect] = React.useState("Text");
+type PropsType = {
+  select: string;
+  setSelect: (select: string) => void;
+};
+
+export const BasicSelect: React.FC<PropsType> = (props) => {
+  const { select, setSelect } = props;
 
   const handleChange = (event: SelectChangeEvent) => {
     setSelect(event.target.value as string);
