@@ -7,7 +7,8 @@ import { packsThunks } from "features/packs/packs.slice";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
 import { TextInputFormForModal } from "reusableComponents/TextInputFormForModal";
-import { GetPacksPayload } from "features/packs/packs.api";
+import { CardPacks, GetPacksPayload } from "features/packs/packs.api";
+import { InputTypeFileModal } from "reusableComponents/InputTypeFileModal";
 
 type PropsType = {
   open: boolean;
@@ -15,6 +16,7 @@ type PropsType = {
   name: string;
   modalData?: { id: string; name: string };
   setModalData?: (data: { id: string; name: string }) => void;
+  deckCover: string;
   title: string;
   pack: GetPacksPayload;
 };
@@ -22,18 +24,11 @@ type PropsType = {
 export type Inputs = {
   pack: string;
   rememberMe: boolean;
+  deckCover: string;
 };
 
-export const EditPackModal: React.FC<PropsType> = (props) => {
-  const {
-    open,
-    setOpen,
-    name,
-    modalData,
-    title,
-    pack,
-    // defValue, setDefValue
-  } = props;
+export const UpdatePackModal: React.FC<PropsType> = (props) => {
+  const { open, setOpen, name, modalData, title, pack, deckCover } = props;
   const {
     control,
     handleSubmit,
@@ -49,6 +44,7 @@ export const EditPackModal: React.FC<PropsType> = (props) => {
       cardsPack: {
         _id: modalData!.id,
         name: data.pack,
+        deckCover: data.deckCover,
         private: data.rememberMe,
       },
     };
@@ -66,6 +62,7 @@ export const EditPackModal: React.FC<PropsType> = (props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormWrapper>
           <InputWrapper>
+            <InputTypeFileModal name="deckCover" control={control} modalKey={"update"} deckCover={deckCover} />
             <TextInputFormForModal
               name="pack"
               label="Pack"

@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useNavigate } from "react-router-dom";
 import { CardPacks, GetPacksPayload } from "features/packs/packs.api";
 import { cutter, saveState } from "utils";
-import { DeletePackModal, EditPackModal } from "reusableModal";
+import { DeletePackModal, UpdatePackModal } from "reusableModal";
 import styled from "styled-components";
 
 type PropsType = {
@@ -25,6 +25,7 @@ export const CurrentPacks = ({ items, pack }: PropsType) => {
   const [open, setOpen] = useState(false); //MODAL
   const [openDelete, setOpenDelete] = useState(false); //MODAL DELETE
   const [modalData, setModalData] = useState<{ id: string; name: string }>({ id: "", name: "" });
+  const [deckCover, setDeckCover] = useState("");
 
   const deleteHandler = (id: string, name: string) => {
     setModalData({ id, name });
@@ -33,7 +34,12 @@ export const CurrentPacks = ({ items, pack }: PropsType) => {
   };
 
   const updateHandler = (id: string, name: string) => {
-    setModalData({ id, name });
+    const currentItem = items.find((el) => el._id === id);
+    if (currentItem) {
+      setModalData({ id, name });
+      setDeckCover(currentItem.deckCover);
+    }
+
     setOpen(true);
   };
 
@@ -50,7 +56,7 @@ export const CurrentPacks = ({ items, pack }: PropsType) => {
         modalData={modalData}
       />
 
-      <EditPackModal
+      <UpdatePackModal
         open={open}
         setOpen={setOpen}
         name={modalData.name}
@@ -58,6 +64,7 @@ export const CurrentPacks = ({ items, pack }: PropsType) => {
         modalData={modalData}
         setModalData={setModalData}
         pack={pack}
+        deckCover={deckCover}
       />
 
       {items.map((row) => (

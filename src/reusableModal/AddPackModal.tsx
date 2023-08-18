@@ -38,7 +38,6 @@ export const AddPackModal: React.FC<PropsType> = (props) => {
   const userIDfromProfile = useAppSelector(userIDfromProfileSelector);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     const payload: PayloadTypeForUpdate = {
       cardsPack: {
         name: data.pack,
@@ -59,7 +58,7 @@ export const AddPackModal: React.FC<PropsType> = (props) => {
     <BasicModal open={open} setOpen={setOpen} title={title}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormWrapper>
-          <InputTypeFileModal name="deckCover" control={control} />
+          <InputTypeFileModal name="deckCover" control={control} modalKey={"add"} />
           <InputWrapper>
             <TextInputFormForModal
               name="pack"

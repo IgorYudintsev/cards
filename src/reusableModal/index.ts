@@ -1,5 +1,5 @@
 export { AddPackModal } from "reusableModal/AddPackModal";
-export { EditPackModal } from "reusableModal/EditPackModal";
+export { UpdatePackModal } from "reusableModal/UpdatePackModal";
 export { DeletePackModal } from "reusableModal/DeletePackModal";
 export { BasicModal } from "./BasicModal";
 

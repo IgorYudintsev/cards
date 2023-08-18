@@ -11,7 +11,7 @@ import { cutter } from "utils";
 import { cardsThunks } from "features/cards/cards.slice";
 import { isLoadingSelector } from "app/app.selectors";
 import { userIDfromProfileSelector } from "features/auth/auth.selectors";
-import { DeletePackModal, EditPackModal, UpdateCardModal } from "reusableModal";
+import { DeletePackModal, UpdatePackModal, UpdateCardModal } from "reusableModal";
 import { DeleteCardModal } from "reusableModal/DeleteCardModal";
 import Rating from "@mui/material/Rating";
 import { useNavigate } from "react-router-dom";
