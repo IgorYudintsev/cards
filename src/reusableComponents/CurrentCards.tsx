@@ -29,6 +29,7 @@ export const CurrentCards = ({ items }: PropsType) => {
   const [openDelete, setOpenDelete] = useState(false); //MODAL DELETE
   const [modalData, setModalData] = useState<CardType>({ cardsPack_id: "" });
   const [modalDataDELETE, setModalDataDELETE] = useState({ question: "", user_id: "", cardsPack_id: "" });
+  const [deckCover, setDeckCover] = useState<string | undefined>("");
 
   const deleteHandler = (
     question: string | undefined,
@@ -48,7 +49,8 @@ export const CurrentCards = ({ items }: PropsType) => {
     question: string | undefined,
     answer: string | undefined
   ) => {
-    if (cardId && cardsPack_id) {
+    const currentItem = items.find((el) => el._id === cardId);
+    if (cardId && cardsPack_id && currentItem) {
       setModalData({
         _id: cardId,
         cardsPack_id,
@@ -56,6 +58,7 @@ export const CurrentCards = ({ items }: PropsType) => {
         answer,
       });
       setOpen(true);
+      setDeckCover(currentItem.questionImg);
     }
   };
 
@@ -71,7 +74,13 @@ export const CurrentCards = ({ items }: PropsType) => {
         title={"Delete pack"}
         modalDataDELETE={modalDataDELETE}
       />
-      <UpdateCardModal open={open} setOpen={setOpen} title={"Update card"} modalData={modalData} />
+      <UpdateCardModal
+        open={open}
+        setOpen={setOpen}
+        title={"Update card"}
+        modalData={modalData}
+        deckCover={deckCover}
+      />
       {items.map((row) => (
         <TableRow key={row._id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
           <TableCell component="th" scope="row">
